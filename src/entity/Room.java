@@ -18,5 +18,27 @@ public class Room {
     @OneToMany(mappedBy = "room")
     private List<Shelf> shelves;
 
-    // Constructors, Getters, Setters
+	public UUID getId() {
+		return id;
+	}
+
+	public void setId(UUID id) {
+		this.id = id;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public List<Shelf> getShelves() {
+		return shelves;
+	}
+
+	public void setShelves(List<Shelf> shelves) {
+		this.shelves = shelves;
+	}
 }

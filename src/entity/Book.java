@@ -34,5 +34,67 @@ public class Book {
     @OneToMany(mappedBy = "book")
     private List<Borrower> borrowers;
 
-    // Constructors, Getters, Setters
+	public UUID getId() {
+		return id;
+	}
+
+	public void setId(UUID id) {
+		this.id = id;
+	}
+
+	public int getEdition() {
+		return edition;
+	}
+
+	public void setEdition(int edition) {
+		this.edition = edition;
+	}
+
+	public String getISBNCode() {
+		return ISBNCode;
+	}
+
+	public void setISBNCode(String iSBNCode) {
+		ISBNCode = iSBNCode;
+	}
+
+	public int getPublicationYear() {
+		return publicationYear;
+	}
+
+	public void setPublicationYear(int publicationYear) {
+		this.publicationYear = publicationYear;
+	}
+
+	public String getPublisherName() {
+		return publisherName;
+	}
+
+	public void setPublisherName(String publisherName) {
+		this.publisherName = publisherName;
+	}
+
+	public Shelf getShelf() {
+		return shelf;
+	}
+
+	public void setShelf(Shelf shelf) {
+		this.shelf = shelf;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public List<Borrower> getBorrowers() {
+		return borrowers;
+	}
+
+	public void setBorrowers(List<Borrower> borrowers) {
+		this.borrowers = borrowers;
+	}
 }

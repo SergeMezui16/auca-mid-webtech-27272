@@ -29,6 +29,52 @@ public class Location {
     @OneToMany(mappedBy = "village")
     private List<Person> residents;
 
-    // Constructors, Getters, Setters
+	public synchronized UUID getId() {
+		return id;
+	}
+
+	public synchronized void setId(UUID id) {
+		this.id = id;
+	}
+
+	public synchronized String getCode() {
+		return code;
+	}
+
+	public synchronized void setCode(String code) {
+		this.code = code;
+	}
+
+	public synchronized String getName() {
+		return name;
+	}
+
+	public synchronized void setName(String name) {
+		this.name = name;
+	}
+
+	public synchronized Location getParent() {
+		return parent;
+	}
+
+	public synchronized void setParent(Location parent) {
+		this.parent = parent;
+	}
+
+	public synchronized LocationType getType() {
+		return type;
+	}
+
+	public synchronized void setType(LocationType type) {
+		this.type = type;
+	}
+
+	public synchronized List<Person> getResidents() {
+		return residents;
+	}
+
+	public synchronized void setResidents(List<Person> residents) {
+		this.residents = residents;
+	}
 }
 
