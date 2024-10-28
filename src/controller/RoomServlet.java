@@ -83,13 +83,15 @@ public class RoomServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		String code = request.getParameter("code");
 
-		if(id != null) this.repository.update(id, name, code);
+		if (id != null)
+			this.repository.update(id, name, code);
 	}
 
 	private void delete(HttpServletRequest request, HttpServletResponse response) {
 		UUID id = UUID.fromString(request.getParameter("id"));
-		
-		if(id != null) this.repository.delete(id);
+
+		if (id != null)
+			this.repository.delete(id);
 	}
 
 }

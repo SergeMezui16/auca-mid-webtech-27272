@@ -10,7 +10,6 @@
   <script src="./script.js"></script>
 </head>
 
-
 <body>
 	<div class="container">
     <header>
@@ -22,7 +21,7 @@
     </header>
     <hr>
     <div class="center-box">
-      <button class="btn" id="modal-btn">Hi, __NAME__</button>
+		<a href="rooms">Rooms</a>
     </div>
   </div>
 </body>

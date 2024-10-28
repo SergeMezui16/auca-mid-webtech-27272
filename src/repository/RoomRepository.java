@@ -58,7 +58,7 @@ public class RoomRepository {
     public Room update(UUID id, String name, String code) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Room room = session.get(Room.class, id.toString());
+        Room room = session.get(Room.class, id);
         room.setName(name);
         room.setCode(code);
         session.getTransaction().commit();
