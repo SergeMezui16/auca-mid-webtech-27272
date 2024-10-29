@@ -63,7 +63,7 @@ public class ShelfServlet extends HttpServlet {
 	}
 	
     private List<Room> getAllRooms() {
-        return (new RoomRepository()).findAll();
+        return RoomRepository.findAll();
     }
 	
 	private void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

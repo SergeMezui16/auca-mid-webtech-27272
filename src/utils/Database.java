@@ -1,5 +1,6 @@
 package utils;
 
+import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 
@@ -25,6 +26,13 @@ public class Database {
 	public static <T> T find(Class<T> entityType, UUID id) {
 		Session session = Database.getSession().openSession();
 		T data =  session.get(entityType, id);
+		session.close();
+		return data;
+	}
+	
+	public static <T> List<T> findAll(Class<T> entityType) {
+		Session session = Database.getSession().openSession();
+		List<T> data = session.createQuery("FROM " + entityType.getName(), entityType).list();
 		session.close();
 		return data;
 	}
