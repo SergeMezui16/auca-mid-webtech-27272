@@ -17,12 +17,14 @@
 		<tr>
 			<th>Code</th>
 			<th>Name</th>
+			<th>Shelves</th>
 			<th>Actions</th>
 		</tr>
 		<c:forEach var="room" items="${rooms}">
 			<tr>
 				<td>${room.code}</td>
 				<td>${room.name}</td>
+				<td>${room.shelves.size()}</td>
 				<td>
 					<button>
 						<a href="${pageContext.request.contextPath}/rooms?action=edit&id=${room.id}">Edit</a>
@@ -32,7 +34,12 @@
 						<input type="hidden" name="action" value="delete" /> <input
 							type="hidden" name="id" value="${room.id}" />
 						<button type="submit">Delete</button>
-					</form>
+					</form> | 
+					<c:if test="${!room.shelves.isEmpty()}">
+					<button>
+						<a href="${pageContext.request.contextPath}/rooms?action=shelves&id=${room.id}">Shelves</a>
+					</button>
+					</c:if>
 				</td>
 			</tr>
 		</c:forEach>

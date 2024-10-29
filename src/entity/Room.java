@@ -25,7 +25,7 @@ public class Room {
     @Column(name = "room_name")
     private String name;
 
-	@OneToMany(mappedBy = "room")
+	@OneToMany(mappedBy = "room", fetch = FetchType.EAGER)
     private List<Shelf> shelves;
 
     public String getName() {

@@ -29,6 +29,9 @@ public class RoomServlet extends HttpServlet {
 			request.setAttribute("room", findRoomById(request));
 			request.getRequestDispatcher("/WEB-INF/views/rooms/edit.jsp").forward(request, response);
 			break;
+		case "shelves":
+			this.shelves(request, response);
+			break;
 		case "list":
 		default:
 			this.list(request, response);
@@ -59,6 +62,13 @@ public class RoomServlet extends HttpServlet {
 	private void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("rooms", RoomRepository.findAll());
 		request.getRequestDispatcher("/WEB-INF/views/rooms/index.jsp").forward(request, response);
+	}
+
+	private void shelves(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Room room = findRoomById(request);
+		request.setAttribute("room", room);
+		request.setAttribute("shelves", room.getShelves());
+		request.getRequestDispatcher("/WEB-INF/views/rooms/shelves.jsp").forward(request, response);
 	}
 
 	private Room findRoomById(HttpServletRequest request) {
