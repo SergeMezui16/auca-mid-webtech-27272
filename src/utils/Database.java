@@ -79,7 +79,7 @@ public class Database {
 		settings.setProperty(Environment.PASS, "");
 		settings.setProperty(Environment.HBM2DDL_AUTO, "create");
 		settings.setProperty(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
-		settings.setProperty(Environment.HBM2DDL_AUTO, "validate");
+		settings.setProperty(Environment.HBM2DDL_AUTO, "update"); // update | validate | create
 		settings.setProperty(Environment.SHOW_SQL, "true");
 		
 		return settings;
