@@ -21,7 +21,9 @@
     </header>
     <hr>
     <div class="center-box">
-		<a href="rooms">Rooms</a>
+		<a href="rooms">Rooms</a> | 
+		<a href="shelves">Shelves</a> |
+		<a href="books">Books</a>
     </div>
   </div>
 </body>
