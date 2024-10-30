@@ -19,7 +19,6 @@ public class RoomRepository {
 		Room room = new Room();
 		room.setName(name);
 		room.setCode(code);
-		room.setId(UUID.randomUUID());
 
 		Database.save(room);
 
