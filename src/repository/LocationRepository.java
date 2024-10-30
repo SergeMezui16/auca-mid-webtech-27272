@@ -3,6 +3,8 @@ package repository;
 import java.util.List;
 import java.util.UUID;
 
+import org.hibernate.Session;
+
 import entity.Location;
 import entity.LocationType;
 import utils.Database;
@@ -14,8 +16,12 @@ public class LocationRepository {
 	}
 
 	public static List<Location> findAllVillages() {
-		return Database.findAll(Location.class);
-		// return Database.executeSelectQuery(Location.class, "FROM Location l WHERE l.type = " + LocationType.VILLAGE);
+		Session session = Database.getSession().openSession();
+		List<Location> data = session.createQuery("SELECT l FROM Location l WHERE l.type = :type", Location.class)
+				.setParameter("type", LocationType.VILLAGE)
+				.list();
+		session.close();
+		return data;
 	}
 
 	public static Location findById(UUID id) {
