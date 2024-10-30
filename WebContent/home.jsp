@@ -23,7 +23,8 @@
     <div class="center-box">
 		<a href="rooms">Rooms</a> | 
 		<a href="shelves">Shelves</a> |
-		<a href="books">Books</a>
+		<a href="books">Books</a> |
+		<a href="locations">Locations</a>
     </div>
   </div>
 </body>

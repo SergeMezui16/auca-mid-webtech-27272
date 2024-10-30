@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Create Shelf</title>
+    <title>Edit Shelf</title>
 </head>
 <body>
     <h1>Edit Shelf</h1>
