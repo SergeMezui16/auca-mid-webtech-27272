@@ -13,6 +13,11 @@ public class LocationRepository {
 		return Database.findAll(Location.class);
 	}
 
+	public static List<Location> findAllVillages() {
+		return Database.findAll(Location.class);
+		// return Database.executeSelectQuery(Location.class, "FROM Location l WHERE l.type = " + LocationType.VILLAGE);
+	}
+
 	public static Location findById(UUID id) {
 		return Database.find(Location.class, id);
 	}
