@@ -16,6 +16,10 @@ public class User extends Person {
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
     private Role role;
+    
+    public String getName() {
+    	return this.getFirstName() + " " + this.getLastName();
+    }
 
 	public String getUsername() {
 		return username;
