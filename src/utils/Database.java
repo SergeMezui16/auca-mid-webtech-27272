@@ -37,13 +37,6 @@ public class Database {
 		return data;
 	}
 	
-	public static <T> List<T> executeSelectQuery(Class<T> entityType, String queryString) {
-		Session session = Database.getSession().openSession();
-		List<T> data = session.createQuery(queryString, entityType).list();
-		session.close();
-		return data;
-	}
-	
 	public static <T> void delete(Class<T> entityType, Serializable id) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();

@@ -24,7 +24,11 @@
 		<a href="rooms">Rooms</a> | 
 		<a href="shelves">Shelves</a> |
 		<a href="books">Books</a> |
-		<a href="locations">Locations</a>
+		<a href="locations">Locations</a>|
+		<a href="users">Users</a>|
+		<a href="membership_types">MembershipType</a>|
+		<a href="memberships">Memberships</a>|
+		<a href="security">Login</a>
     </div>
   </div>
 </body>

@@ -40,13 +40,13 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.23</version>
-		</dependency>
+		</dependency>     
 		<!-- BCrypt -->
 		<dependency>
 			<groupId>org.mindrot</groupId>
 			<artifactId>jbcrypt</artifactId>
 			<version>0.4</version>
-		</dependency>        
+		</dependency>   
 		<!-- JSTL Library -->
         <dependency>
             <groupId>javax.servlet</groupId>

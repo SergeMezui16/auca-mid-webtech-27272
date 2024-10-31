@@ -26,6 +26,10 @@ public class UserRepository {
 		return BCrypt.hashpw(plainPassword, BCrypt.gensalt());
 	}
 
+	public static boolean checkPassword(String plainPassword, String hashedPassword) {
+		return BCrypt.checkpw(plainPassword, hashedPassword);
+	}
+
 	public static User create(String username, String firstname, Gender gender, String lastname, String phone,
 			String password, Role role, UUID villageId) {
 		Location location = LocationRepository.findById(villageId);

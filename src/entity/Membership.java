@@ -16,12 +16,6 @@ public class Membership {
     @Column(name = "expiring_time")
     private Date expiringTime;
 
-    @Column(name = "fine")
-    private int fine;
-
-    @Column(name = "membership_code")
-    private String code;
-
     @ManyToOne
     @JoinColumn(name = "membership_type_id")
     private MembershipType type;
@@ -36,6 +30,10 @@ public class Membership {
 
     @Column(name = "registration_date")
     private Date registrationDate;
+    
+    public boolean isPending() {
+    	return this.getStatus().equals(Status.PENDING);
+    }
 
 	public UUID getId() {
 		return id;
@@ -51,22 +49,6 @@ public class Membership {
 
 	public void setExpiringTime(Date expiringTime) {
 		this.expiringTime = expiringTime;
-	}
-
-	public int getFine() {
-		return fine;
-	}
-
-	public void setFine(int fine) {
-		this.fine = fine;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
 	}
 
 	public MembershipType getType() {
