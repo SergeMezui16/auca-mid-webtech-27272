@@ -32,6 +32,9 @@ public class UserServlet extends HttpServlet {
 			request.setAttribute("genders", Gender.values());
 			request.getRequestDispatcher("/WEB-INF/views/users/new.jsp").forward(request, response);
 			break;
+		case "find":
+			this.find(request, response);
+			break;
 		case "id":
 			request.setAttribute("roles", Role.values());
 			request.setAttribute("user", findUserById(request));
@@ -83,6 +86,21 @@ public class UserServlet extends HttpServlet {
 	private void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("users", UserRepository.findAll());
 		request.getRequestDispatcher("/WEB-INF/views/users/index.jsp").forward(request, response);
+	}
+
+	private void find(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println(request.getParameter("phone"));
+		User user = null;
+		
+		try {
+			user = UserRepository.findByPhone(request.getParameter("phone"));
+		} catch(Exception e) {
+			System.out.println(request.getParameter("phone") + ": Not found.");
+		}
+		
+		request.setAttribute("user", user);
+		request.setAttribute("phone", request.getParameter("phone"));
+		request.getRequestDispatcher("/WEB-INF/views/users/find.jsp").forward(request, response);
 	}
 
 	private User findUserById(HttpServletRequest request) {

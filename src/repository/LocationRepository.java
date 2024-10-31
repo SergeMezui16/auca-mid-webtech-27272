@@ -12,7 +12,11 @@ import utils.Database;
 public class LocationRepository {
 
 	public static List<Location> findAll() {
-		return Database.findAll(Location.class);
+		Session session = Database.getSession().openSession();
+		List<Location> data = session.createQuery("SELECT l FROM Location l ORDER BY l.type", Location.class)
+				.list();
+		session.close();
+		return data;
 	}
 
 	public static List<Location> findAllVillages() {

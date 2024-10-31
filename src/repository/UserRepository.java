@@ -3,6 +3,9 @@ package repository;
 import java.util.List;
 import java.util.UUID;
 
+import javax.persistence.NoResultException;
+
+import org.hibernate.Session;
 import org.mindrot.jbcrypt.BCrypt;
 
 import entity.Gender;
@@ -20,6 +23,15 @@ public class UserRepository {
 
 	public static User findById(String username) {
 		return Database.find(User.class, username);
+	}
+
+	public static User findByPhone(String phone) throws NoResultException {
+		Session session = Database.getSession().openSession();
+		User data = session.createQuery("SELECT u FROM User u WHERE u.phoneNumber = :phone", User.class)
+				.setParameter("phone", phone)
+				.getSingleResult();
+		session.close();
+		return data;
 	}
 
 	public static String hashPassword(String plainPassword) {

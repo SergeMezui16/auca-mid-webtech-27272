@@ -11,7 +11,8 @@
 	<p>Total users: ${users.size()}</p>
 	<p>
 		<a href="${pageContext.request.contextPath}/users?action=new">Add
-			New User</a>
+			New User</a> | <a href="${pageContext.request.contextPath}/users?action=find">
+			Find User location From phone</a>
 	<p>
 	<table border="1">
 		<tr>
