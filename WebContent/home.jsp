@@ -13,13 +13,14 @@
 <body>
 	<div class="container">
     <header>
-      <h1>Hello ${pageContext.session.getAttribute("user")}!</h1>
+      <h1>Hello ${user.name}!</h1>
       <div>
-        <h2 id="role">${pageContext.session.getAttribute("user").role}</h2>
-        <c:if test="${pageContext.session.getAttribute('user') != null}">
+        <h2 id="role">${user.role}</h2>
+        <c:if test="${user != null}">
         <form action="${pageContext.request.contextPath}/security?action=logout" method="post">
         	<button type="submit">Logout</button>
         </form>
+        <a href="${pageContext.request.contextPath}/security?action=profile">Mon profile</a>
         </c:if>
       </div>
     </header>
