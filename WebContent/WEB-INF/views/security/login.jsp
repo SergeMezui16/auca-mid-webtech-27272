@@ -6,9 +6,9 @@
 <body>
 <h2>Login</h2>
 
-<% session.getAttribute("user"); %>
-
+<% if (session.getAttribute("user") != null) { %>
 <p>You are already logged as ${pageContext.session.getAttribute("user")}.<br> Do you want to login as someone else or <a href="${pageContext.request.contextPath}/">go back home</a></p>
+<% } %>
 
 <form action="${pageContext.request.contextPath}/security?action=login" method="post">
 	<% String errorMessage = (String) request.getAttribute("errorMessage"); %>
