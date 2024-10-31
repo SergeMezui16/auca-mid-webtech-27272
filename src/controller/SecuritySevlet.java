@@ -41,6 +41,9 @@ public class SecuritySevlet extends HttpServlet  {
 		case "login":
 			login(request, response);
 			break;
+		case "logout":
+			logout(request, response);
+			break;
 		}
 
 		response.sendRedirect(request.getContextPath() + "/");
@@ -56,7 +59,6 @@ public class SecuritySevlet extends HttpServlet  {
             if (user != null && UserRepository.checkPassword(password, user.getPassword())) {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
-                response.sendRedirect(request.getContextPath() + "/");
                 return;
             }
             
@@ -64,6 +66,15 @@ public class SecuritySevlet extends HttpServlet  {
             
         } catch (NoResultException e) {
             request.setAttribute("errorMessage", "Invalid username or password");
+        }
+        
+        request.getRequestDispatcher("/WEB-INF/views/security/login.jsp").forward(request, response);
+	}
+	
+	private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
         }
         
         request.getRequestDispatcher("/WEB-INF/views/security/login.jsp").forward(request, response);

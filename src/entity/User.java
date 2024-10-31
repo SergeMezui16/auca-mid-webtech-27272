@@ -17,6 +17,10 @@ public class User extends Person {
     @Column(name = "role", nullable = false)
     private Role role;
     
+    public String toString() {
+    	return this.getName();
+    }
+    
     public String getName() {
     	return this.getFirstName() + " " + this.getLastName();
     }

@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html lang="en">
 <head>
 	<title>Home Page</title>
@@ -13,10 +13,14 @@
 <body>
 	<div class="container">
     <header>
-      <h1>Hello !</h1>
+      <h1>Hello ${pageContext.session.getAttribute("user")}!</h1>
       <div>
-        <h2 id="role">___ROLE___</h2>
-        <a href="logout" class="btn btn-danger">Logout!</a>
+        <h2 id="role">${pageContext.session.getAttribute("user").role}</h2>
+        <c:if test="${pageContext.session.getAttribute('user') != null}">
+        <form action="${pageContext.request.contextPath}/security?action=logout" method="post">
+        	<button type="submit">Logout</button>
+        </form>
+        </c:if>
       </div>
     </header>
     <hr>
