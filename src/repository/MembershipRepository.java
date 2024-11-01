@@ -18,12 +18,16 @@ public class MembershipRepository {
 		return Database.find(Membership.class, id);
 	}
 
-	public static Membership ask(Date time, Date date, String userId, UUID type) {
+	public static Membership ask(User reader, UUID type) {
+		Date date = new Date();
+		Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DAY_OF_MONTH, 30);
+        
 		MembershipType membershipType = MembershipTypeRepository.findById(type);
-		User reader = UserRepository.findById(userId);
 		
 		Membership membership = new Membership();
-		membership.setExpiringTime(time);
+		membership.setExpiringTime(calendar.getTime());
 		membership.setRegistrationDate(date);
 		membership.setStatus(Status.PENDING);
 		membership.setReader(reader);
@@ -37,7 +41,14 @@ public class MembershipRepository {
 	public static Membership approve(UUID id) {
 		Membership membership = MembershipRepository.findById(id);
 
+		Date date = new Date();
+		Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DAY_OF_MONTH, 30);
+        
 		membership.setStatus(Status.APPROVED);
+		membership.setExpiringTime(calendar.getTime());
+		membership.setRegistrationDate(date);
 		Database.save(membership);
 
 		return membership;

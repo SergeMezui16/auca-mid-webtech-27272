@@ -32,8 +32,23 @@
 		<a href="locations">Locations</a>|
 		<a href="users">Users</a>|
 		<a href="membership_types">MembershipType</a>|
-		<a href="memberships">Memberships</a>|
-		<a href="security">Login</a>
+		<a href="memberships">Memberships</a>
+    </div>
+    
+    <div>
+    	<c:if test="${user.hasMembership() == false}">
+    	<h2>You don't have membership yet</h2>
+		<c:forEach var="membershipType" items="${membershipTypes}">
+			Name: ${membershipType.name} <br>
+			Prix: ${membershipType.price} RWF / Month<br>
+			Max Book: ${membershipType.maxBooks} <br>
+			<form method="post" action="memberships">
+				<input type="hidden" name="action" value="ask" />
+				<input type="hidden" name="type" value="${membershipType.id}" />	
+				<button type="submit">Subscribe</button>
+			</form>
+		</c:forEach>
+		</c:if>
     </div>
   </div>
 </body>

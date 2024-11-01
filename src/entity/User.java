@@ -1,6 +1,16 @@
 package entity;
 
-import javax.persistence.*;
+import java.util.Comparator;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "user")
@@ -16,6 +26,9 @@ public class User extends Person {
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
     private Role role;
+
+	@OneToMany(mappedBy = "reader", fetch = FetchType.EAGER)
+    private List<Membership> memberships;
     
     public String toString() {
     	return this.getName();
@@ -23,6 +36,26 @@ public class User extends Person {
     
     public String getName() {
     	return this.getFirstName() + " " + this.getLastName();
+    }
+    
+    public boolean hasMembership() {
+    	return this.memberships.stream().filter(m -> m.getStatus().equals(Status.APPROVED) && m.isValid()).count() != 0;
+    }
+    
+    public Membership getMembership() {
+    	return this.memberships.stream().max(Comparator.comparingInt(m -> m.getType().getMaxBooks())).get();
+    }
+    
+    public boolean canBorrowBook() {
+    	return this.role.equals(Role.STUDENT) || this.role.equals(Role.STUDENT);
+    }
+    
+    public boolean canWrite() {
+    	return this.role.equals(Role.LIBRARIAN);
+    }
+    
+    public boolean canRead() {
+    	return !this.role.equals(Role.STUDENT) && !this.role.equals(Role.STUDENT);
     }
 
 	public String getUsername() {
@@ -53,6 +86,14 @@ public class User extends Person {
 		this.role = role;
 		
 		return this;
+	}
+
+	public List<Membership> getMemberships() {
+		return memberships;
+	}
+
+	public void setMemberships(List<Membership> memberships) {
+		this.memberships = memberships;
 	}
 }
 

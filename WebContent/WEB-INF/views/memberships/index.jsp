@@ -23,12 +23,15 @@
                 <td>${membership.registrationDate}</td>
                 <td>${membership.expiringTime}</td>
                 <td>
-                    <button><a href="${pageContext.request.contextPath}/memberships?action=approve&id=${membership.id}">Approve</a></button> |
-                    <button><a href="${pageContext.request.contextPath}/memberships?action=reject&id=${membership.id}">Reject</a></button>
-                    <form action="${pageContext.request.contextPath}/membership_types" method="post" style="display:inline;">
-                        <input type="hidden" name="action" value="delete"/>
+                   	<form action="${pageContext.request.contextPath}/memberships" method="post" style="display:inline;">
+                        <input type="hidden" name="action" value="approve"/>
                         <input type="hidden" name="id" value="${membership.id}"/>
-                        <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+                        <button type="submit" onclick="return confirm('Are you sure?')">Approve</button>
+                    </form>
+                    <form action="${pageContext.request.contextPath}/memberships" method="post" style="display:inline;">
+                        <input type="hidden" name="action" value="reject"/>
+                        <input type="hidden" name="id" value="${membership.id}"/>
+                        <button type="submit" onclick="return confirm('Are you sure?')">Reject</button>
                     </form>
                 </td>
             </tr>

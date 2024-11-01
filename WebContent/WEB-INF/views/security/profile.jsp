@@ -63,6 +63,31 @@
 		</tr>
 	</table>
 
+	<c:if test="${user.hasMembership() }">
+	<h3>Memberships</h3>
+	<table border="1">
+		<tr>
+			<th>Type</th>
+			<th>${user.membership.type.name}</th>
+		</tr>
+		<tr>
+			<th>Max</th>
+			<th>${user.membership.type.maxBooks}</th>
+		</tr>
+		<tr>
+			<th>Subscription date</th>
+			<th>${user.membership.registrationDate}</th>
+		</tr>
+		<tr>
+			<th>Issue date</th>
+			<th>${user.membership.registrationDate}</th>
+		</tr>
+		<tr>
+			<th>Status</th>
+			<th>${user.membership.status}</th>
+		</tr>
+	</table>
+	</c:if>
 </body>
 </html>
 

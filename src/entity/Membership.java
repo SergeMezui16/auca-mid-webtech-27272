@@ -2,6 +2,9 @@ package entity;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -10,7 +13,10 @@ import java.util.UUID;
 public class Membership {
 
     @Id
-    @Column(name = "membership_id", nullable = false)
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(name = "membership_id", updatable = false, nullable = false, columnDefinition = "VARCHAR(36)")
+    @Type(type = "uuid-char")
     private UUID id;
 
     @Column(name = "expiring_time")
@@ -33,6 +39,10 @@ public class Membership {
     
     public boolean isPending() {
     	return this.getStatus().equals(Status.PENDING);
+    }
+    
+    public boolean isValid() {
+    	return this.expiringTime.after(new Date());
     }
 
 	public UUID getId() {
