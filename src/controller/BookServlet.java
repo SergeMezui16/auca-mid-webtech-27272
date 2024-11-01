@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 import entity.Book;
+import entity.Shelf;
 import repository.BookRepository;
 import repository.ShelfRepository;
 
@@ -69,14 +70,33 @@ public class BookServlet extends HttpServlet {
 		return BookRepository.findById(UUID.fromString(request.getParameter("id")));
 	}
 
-	private void post(HttpServletRequest request, HttpServletResponse response) {
+	private void post(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Shelf shelf = ShelfRepository.findById(UUID.fromString(request.getParameter("shelfId")));
+		
+		if(shelf.isFull()) {
+			request.setAttribute("errorMessage", "This shelf is full, you cannot add more book!");
+			request.setAttribute("shelves", ShelfRepository.findAll());
+			request.getRequestDispatcher("/WEB-INF/views/books/new.jsp").forward(request, response);
+			return;
+		}
+		
+		
 		BookRepository.create(request.getParameter("title"), Integer.parseInt(request.getParameter("edition")),
 				request.getParameter("ISBNCode"), Integer.parseInt(request.getParameter("publicationYear")),
 				request.getParameter("publisherName"), UUID.fromString(request.getParameter("shelfId")));
 	}
 
-	private void put(HttpServletRequest request, HttpServletResponse response) {
+	private void put(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UUID id = UUID.fromString(request.getParameter("id"));
+		Shelf shelf = ShelfRepository.findById(UUID.fromString(request.getParameter("shelfId")));
+		Book book = BookRepository.findById(id);
+		
+		if(shelf.isFull() && !shelf.getId().equals(book.getShelf().getId())) {
+			request.setAttribute("errorMessage", "This shelf is full, you cannot add more book!");
+			request.setAttribute("shelves", ShelfRepository.findAll());
+			request.getRequestDispatcher("/WEB-INF/views/books/edit.jsp").forward(request, response);
+			return;
+		}
 
 		if (id != null)
 			BookRepository.update(id, request.getParameter("title"), Integer.parseInt(request.getParameter("edition")),

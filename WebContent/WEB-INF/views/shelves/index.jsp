@@ -24,8 +24,8 @@
         <c:forEach var="shelf" items="${shelves}">
             <tr>
                 <td>${shelf.bookCategory}</td>
-                <td>${shelf.availableStock}</td>
-                <td>${shelf.borrowedNumber}</td>
+                <td>${shelf.getAvailableNumber()}</td>
+                <td>${shelf.getBorrowedNumber()}</td>
                 <td>${shelf.initialStock}</td>
                 <td>${shelf.room.name}</td>
                 <td>

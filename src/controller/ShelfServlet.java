@@ -77,24 +77,20 @@ public class ShelfServlet extends HttpServlet {
 
 	private void post(HttpServletRequest request, HttpServletResponse response) {
         String bookCategory = request.getParameter("bookCategory");
-        int availableStock = Integer.parseInt(request.getParameter("availableStock"));
-        int borrowedNumber = Integer.parseInt(request.getParameter("borrowedNumber"));
         int initialStock = Integer.parseInt(request.getParameter("initialStock"));
         UUID roomId = UUID.fromString(request.getParameter("roomId"));
 
-        ShelfRepository.create(bookCategory, availableStock, borrowedNumber, initialStock, roomId);
+        ShelfRepository.create(bookCategory, initialStock, roomId);
 	}
 
 	private void put(HttpServletRequest request, HttpServletResponse response) {
         UUID id = UUID.fromString(request.getParameter("id"));
         String bookCategory = request.getParameter("bookCategory");
-        int availableStock = Integer.parseInt(request.getParameter("availableStock"));
-        int borrowedNumber = Integer.parseInt(request.getParameter("borrowedNumber"));
         int initialStock = Integer.parseInt(request.getParameter("initialStock"));
         UUID roomId = UUID.fromString(request.getParameter("roomId"));
 
 		if (id != null)
-			ShelfRepository.update(id, availableStock, bookCategory, borrowedNumber, initialStock, roomId);
+			ShelfRepository.update(id, bookCategory, initialStock, roomId);
 	}
 
 	private void delete(HttpServletRequest request, HttpServletResponse response) {

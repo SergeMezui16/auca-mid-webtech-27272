@@ -7,6 +7,12 @@
 </head>
 <body>
     <h1>Edit Book</h1>
+    <% String errorMessage = (String) request.getAttribute("errorMessage"); %>
+	<% if (errorMessage != null) { %>
+	    <div style="color:red;">
+	        <%= errorMessage %>
+	    </div>
+	<% } %>
     <form action="books" method="post">
         <input type="hidden" name="action" value="update" />
         <input type="hidden" name="id" value="${book.id}" />

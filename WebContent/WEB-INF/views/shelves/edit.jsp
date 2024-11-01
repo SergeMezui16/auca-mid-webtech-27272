@@ -13,12 +13,6 @@
         <label for="bookCategory">Book Category:</label>
         <input type="text" id="bookCategory" value="${shelf.bookCategory}" name="bookCategory" required>
         <br><br>
-        <label for="availableStock">Available Stock:</label>
-        <input type="number" id="availableStock" value="${shelf.availableStock}" name="availableStock" required>
-        <br><br>
-        <label for="borrowedNumber">Borrowed Number:</label>
-        <input type="number" id="borrowedNumber" value="${shelf.borrowedNumber}" name="borrowedNumber" required>
-        <br><br>
         <label for="initialStock">Initial Stock:</label>
         <input type="number" id="initialStock" value="${shelf.initialStock}" name="initialStock" required>
         <br><br>

@@ -12,12 +12,6 @@
         <label for="bookCategory">Book Category:</label>
         <input type="text" id="bookCategory" name="bookCategory" required>
         <br><br>
-        <label for="availableStock">Available Stock:</label>
-        <input type="number" id="availableStock" name="availableStock" required>
-        <br><br>
-        <label for="borrowedNumber">Borrowed Number:</label>
-        <input type="number" id="borrowedNumber" name="borrowedNumber" required>
-        <br><br>
         <label for="initialStock">Initial Stock:</label>
         <input type="number" id="initialStock" name="initialStock" required>
         <br><br>

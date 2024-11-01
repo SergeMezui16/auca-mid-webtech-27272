@@ -19,14 +19,8 @@ public class Shelf {
     @Type(type = "uuid-char")
     private UUID id;
 
-    @Column(name = "available_stock")
-    private int availableStock;
-
     @Column(name = "book_category")
     private String bookCategory;
-
-    @Column(name = "borrowed_number")
-    private int borrowedNumber;
 
     @Column(name = "initial_stock")
     private int initialStock;
@@ -35,8 +29,20 @@ public class Shelf {
     @JoinColumn(name = "room_id")
     private Room room;
 
-    @OneToMany(mappedBy = "shelf")
+    @OneToMany(mappedBy = "shelf", fetch = FetchType.EAGER)
     private List<Book> books;
+    
+    public int getBorrowedNumber() {
+    	return (int) this.books.stream().filter(b -> b.getStatus().equals(BookStatus.BORROWED)).count();
+    }
+    
+    public int getAvailableNumber() {
+    	return  this.initialStock - this.books.size();
+    }
+    
+    public boolean isFull() {
+    	return this.books.size() == this.initialStock;
+    }
 
 	public UUID getId() {
 		return id;
@@ -46,28 +52,12 @@ public class Shelf {
 		this.id = id;
 	}
 
-	public int getAvailableStock() {
-		return availableStock;
-	}
-
-	public void setAvailableStock(int availableStock) {
-		this.availableStock = availableStock;
-	}
-
 	public String getBookCategory() {
 		return bookCategory;
 	}
 
 	public void setBookCategory(String bookCategory) {
 		this.bookCategory = bookCategory;
-	}
-
-	public int getBorrowedNumber() {
-		return borrowedNumber;
-	}
-
-	public void setBorrowedNumber(int borrowedNumber) {
-		this.borrowedNumber = borrowedNumber;
 	}
 
 	public int getInitialStock() {
