@@ -62,6 +62,10 @@
 			<th>${user.village.parent.parent.parent.parent.name}</th>
 		</tr>
 	</table>
+	
+	<c:if test="${user.membershipPending() }">
+	<h3>your memberships is pending...</h3>
+	</c:if>
 
 	<c:if test="${user.hasMembership() }">
 	<h3>Memberships</h3>

@@ -38,7 +38,7 @@
     </div>
     
     <div>
-    	<c:if test="${user.hasMembership() == false}">
+    	<c:if test="${user.membershipPending() == false}">
     	<h2>You don't have membership yet</h2>
 		<c:forEach var="membershipType" items="${membershipTypes}">
 			Name: ${membershipType.name} <br>
@@ -50,6 +50,9 @@
 				<button type="submit">Subscribe</button>
 			</form>
 		</c:forEach>
+		</c:if>
+    	<c:if test="${user.membershipPending() == true}">
+    	<h2>Your membership is pending</h2>
 		</c:if>
     </div>
   </div>

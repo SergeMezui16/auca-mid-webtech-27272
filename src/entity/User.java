@@ -60,6 +60,10 @@ public class User extends Person {
     	return this.memberships.stream().filter(m -> m.getStatus().equals(Status.APPROVED) && m.isValid()).count() != 0;
     }
     
+    public boolean membershipPending() {
+    	return this.memberships.stream().filter(m -> m.getStatus().equals(Status.PENDING) && m.isValid()).count() != 0;
+    }
+    
     public Membership getMembership() {
     	return this.memberships.stream().max(Comparator.comparingInt(m -> m.getType().getMaxBooks())).get();
     }
