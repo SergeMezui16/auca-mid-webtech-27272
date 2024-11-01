@@ -21,7 +21,7 @@ public class MembershipRepository {
 
 	public static List<Membership> findAllPending() {
 		Session session = Database.getSession().openSession();
-		List<Membership> data = session.createQuery("SELECT m FROM Membership WHERE m.status = :status", Membership.class)
+		List<Membership> data = session.createQuery("SELECT m FROM Membership m WHERE m.status = :status", Membership.class)
 				.setParameter("status", Status.PENDING)
 				.list();
 		session.close();

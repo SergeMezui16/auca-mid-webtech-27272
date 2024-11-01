@@ -21,6 +21,7 @@ public class HomeServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setAttribute("membershipTypes", MembershipTypeRepository.findAll());
 		request.setAttribute("memberships", MembershipRepository.findAllPending());
+		
 		request.getRequestDispatcher("/home.jsp").forward(request, response);
 	}
 }

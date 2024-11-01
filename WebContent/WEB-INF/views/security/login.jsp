@@ -6,11 +6,11 @@
 <body>
 <h2>Login</h2>
 
-<% if (session.getAttribute("user") != null) { %>
-<p>You are already logged as ${pageContext.session.getAttribute("user")}.<br> Do you want to login as someone else or <a href="${pageContext.request.contextPath}/">go back home</a></p>
-<% } %>
+<c:if test="${user != null}">
+<p>You are already logged as ${user}.<br> Do you want to login as someone else or <a href="${pageContext.request.contextPath}/">go back home</a></p>
+</c:if>
 
-<form action="${pageContext.request.contextPath}/security?action=login" method="post">
+<form action="${pageContext.request.contextPath}/login" method="post">
 	<% String errorMessage = (String) request.getAttribute("errorMessage"); %>
 	<% if (errorMessage != null) { %>
 	    <div style="color:red;">

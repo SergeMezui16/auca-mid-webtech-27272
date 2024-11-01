@@ -15,7 +15,7 @@ import java.util.List;
 public class AuthenticationFilter implements Filter {
 
     private final List<String> authorizedPaths = Arrays.asList(
-            "/security", "/register", "/resources", "/css", "/js", "/images"
+            "/login", "/register", "/resources", "/css", "/js", "/images"
     );
 
     @Override
