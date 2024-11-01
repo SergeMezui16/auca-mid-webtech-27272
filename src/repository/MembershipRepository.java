@@ -1,6 +1,11 @@
 package repository;
 
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+
+import org.hibernate.Session;
 
 import entity.Membership;
 import entity.MembershipType;
@@ -12,6 +17,15 @@ public class MembershipRepository {
 
 	public static List<Membership> findAll() {
 		return Database.findAll(Membership.class);
+	}
+
+	public static List<Membership> findAllPending() {
+		Session session = Database.getSession().openSession();
+		List<Membership> data = session.createQuery("SELECT m FROM Membership WHERE m.status = :status", Membership.class)
+				.setParameter("status", Status.PENDING)
+				.list();
+		session.close();
+		return data;
 	}
 
 	public static Membership findById(UUID id) {
