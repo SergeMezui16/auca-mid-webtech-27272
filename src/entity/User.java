@@ -2,6 +2,7 @@ package entity;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,9 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name = "user")
@@ -29,6 +33,10 @@ public class User extends Person {
 
 	@OneToMany(mappedBy = "reader", fetch = FetchType.EAGER)
     private List<Membership> memberships;
+
+	@OneToMany(mappedBy = "reader")
+	@LazyCollection(LazyCollectionOption.FALSE)
+    private List<Borrower> borrowers;
     
     public String toString() {
     	return this.getName();
@@ -36,6 +44,16 @@ public class User extends Person {
     
     public String getName() {
     	return this.getFirstName() + " " + this.getLastName();
+    }
+    
+    public List<Borrower> getBorrows() {
+    	return this.borrowers.stream()
+    			.filter(b -> b.getStatus().equals(BorrowStatus.BORROWED) || b.getStatus().equals(BorrowStatus.ASKED))
+    			.collect(Collectors.toList());
+    }
+    
+    public int allowedNumberOfBorrowAvailable() {
+    	return this.getMembership().getType().getMaxBooks() - this.getBorrows().size();
     }
     
     public boolean hasMembership() {
@@ -94,6 +112,14 @@ public class User extends Person {
 
 	public void setMemberships(List<Membership> memberships) {
 		this.memberships = memberships;
+	}
+
+	public List<Borrower> getBorrowers() {
+		return borrowers;
+	}
+
+	public void setBorrowers(List<Borrower> borrowers) {
+		this.borrowers = borrowers;
 	}
 }
 

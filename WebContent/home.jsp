@@ -32,7 +32,9 @@
 		<a href="locations">Locations</a>|
 		<a href="users">Users</a>|
 		<a href="membership_types">MembershipType</a>|
-		<a href="memberships">Memberships</a>
+		<a href="memberships">Memberships</a> |
+		<a href="borrows">Borrow a book</a> | 
+		<a href="borrowers">Borrowers</a> | 
     </div>
     
     <div>

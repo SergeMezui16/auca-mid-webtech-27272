@@ -1,0 +1,1 @@
+INSERT INTO `user` (`user_name`, `first_name`, `gender`, `last_name`, `phone_number`, `password`, `role`, `village_id`) VALUES ('27272', 'Serge', 'MALE', 'Mezui', '90987654', '$2a$10$7FW0J94AuBeyC4GszzkdoeUvcbXr9Ad3RVEuwQ2.HXLfnzpepKs8G', 'STUDENT', 'b3ade004-ec6b-4b46-a0ea-36595365c2b6');

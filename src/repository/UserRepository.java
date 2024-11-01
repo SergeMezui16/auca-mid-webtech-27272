@@ -25,6 +25,16 @@ public class UserRepository {
 		return Database.find(User.class, username);
 	}
 
+	public static User findAllBorrowers(String username) {
+		Session session = Database.getSession().openSession();
+		User data = session.createQuery("SELECT u FROM User u WHERE u.role = :student OR u.role = :teacher", User.class)
+				.setParameter("student", Role.STUDENT)
+				.setParameter("teacher", Role.TEACHER)
+				.getSingleResult();
+		session.close();
+		return data;
+	}
+
 	public static User findByPhone(String phone) throws NoResultException {
 		Session session = Database.getSession().openSession();
 		User data = session.createQuery("SELECT u FROM User u WHERE u.phoneNumber = :phone", User.class)

@@ -3,7 +3,10 @@ package repository;
 import java.util.List;
 import java.util.UUID;
 
+import org.hibernate.Session;
+
 import entity.Book;
+import entity.BookStatus;
 import entity.Shelf;
 import utils.Database;
 
@@ -11,6 +14,15 @@ public class BookRepository {
 
 	public static List<Book> findAll() {
 		return Database.findAll(Book.class);
+	}
+
+	public static List<Book> findAllAvailable() {
+		Session session = Database.getSession().openSession();
+		List<Book> data = session.createQuery("SELECT b FROM Book b WHERE b.status = :status", Book.class)
+				.setParameter("status", BookStatus.AVAILABLE)
+				.list();
+		session.close();
+		return data;
 	}
 
 	public static Book findById(UUID id) {
@@ -27,6 +39,7 @@ public class BookRepository {
 		book.setPublisherName(publisherName);
 		book.setTitle(title);
 		book.setShelf(shelf);
+		book.setStatus(BookStatus.AVAILABLE);
 
 		Database.save(book);
 

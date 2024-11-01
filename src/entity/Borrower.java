@@ -2,6 +2,9 @@ package entity;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -10,7 +13,10 @@ import java.util.UUID;
 public class Borrower {
 
 	@Id
-	@Column(name = "reservation_id")
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(name = "reservation_id", updatable = false, nullable = false, columnDefinition = "VARCHAR(36)")
+    @Type(type = "uuid-char")
 	private UUID id;
 
 	@ManyToOne
@@ -23,6 +29,10 @@ public class Borrower {
 	@Column(name = "late_charge_fees")
 	private int lateChargeFees;
 
+	@Column(name = "borrower_status")
+    @Enumerated(EnumType.STRING)
+	private BorrowStatus status;
+
 	@ManyToOne
 	@JoinColumn(name = "reader_id")
 	private User reader;
@@ -32,7 +42,15 @@ public class Borrower {
 
 	@Column(name = "return_date")
 	private Date returnDate;
-
+	
+	public boolean canBorrow() {
+		return this.status.equals(BorrowStatus.ASKED);
+	}
+	
+	public boolean canReturn() {
+		return this.status.equals(BorrowStatus.BORROWED);
+	}
+ 
 	public UUID getId() {
 		return id;
 	}
@@ -87,6 +105,14 @@ public class Borrower {
 
 	public void setReturnDate(Date returnDate) {
 		this.returnDate = returnDate;
+	}
+
+	public BorrowStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(BorrowStatus status) {
+		this.status = status;
 	}
 
 }

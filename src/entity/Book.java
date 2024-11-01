@@ -31,6 +31,10 @@ public class Book {
     @Column(name = "publisher_name")
     private String publisherName;
 
+	@Column(name = "book_status")
+    @Enumerated(EnumType.STRING)
+	private BookStatus status;
+
     @ManyToOne
     @JoinColumn(name = "shelf_id")
     private Shelf shelf;
@@ -103,5 +107,13 @@ public class Book {
 
 	public void setBorrowers(List<Borrower> borrowers) {
 		this.borrowers = borrowers;
+	}
+
+	public BookStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(BookStatus status) {
+		this.status = status;
 	}
 }

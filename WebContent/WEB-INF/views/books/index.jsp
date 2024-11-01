@@ -17,6 +17,7 @@
 		<tr>
 			<th>Title</th>
 			<th>Edition</th>
+			<th>Status</th>
 			<th>ISBN Code</th>
 			<th>Publication Year</th>
 			<th>Publisher Name</th>
@@ -27,6 +28,7 @@
 			<tr>
 				<td>${book.title}</td>
 				<td>${book.edition}</td>
+				<td>${book.status}</td>
 				<td>${book.ISBNCode}</td>
 				<td>${book.publicationYear}</td>
 				<td>${book.publisherName}</td>
