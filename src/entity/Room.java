@@ -27,6 +27,10 @@ public class Room {
 
 	@OneToMany(mappedBy = "room", fetch = FetchType.EAGER)
     private List<Shelf> shelves;
+	
+	public int getNumberOfBook() {
+		return this.shelves.stream().map(Shelf::getNumberOfBook).reduce(0, Integer::sum);
+	}
 
     public String getName() {
 		return name;

@@ -18,6 +18,7 @@
 			<th>Code</th>
 			<th>Name</th>
 			<th>Shelves</th>
+			<th>Number of book</th>
 			<th>Actions</th>
 		</tr>
 		<c:forEach var="room" items="${rooms}">
@@ -25,6 +26,7 @@
 				<td>${room.code}</td>
 				<td>${room.name}</td>
 				<td>${room.shelves.size()}</td>
+				<td>${room.getNumberOfBook()}</td>
 				<td>
 					<button>
 						<a href="${pageContext.request.contextPath}/rooms?action=edit&id=${room.id}">Edit</a>

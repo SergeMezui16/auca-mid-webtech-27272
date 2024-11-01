@@ -43,6 +43,10 @@ public class Shelf {
     public boolean isFull() {
     	return this.books.size() == this.initialStock;
     }
+    
+    public int getNumberOfBook() {
+    	return this.books.size();
+    }
 
 	public UUID getId() {
 		return id;
