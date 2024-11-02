@@ -58,7 +58,7 @@ public class BorrowServlet extends HttpServlet {
 		}
 		
 		Borrower borrower = BorrowerRepository.reserve(bookId, reserveDate, dueDate, reader);
-		session.setAttribute("user", borrower.getReader());
+		session.invalidate();
 		// send a message
 
 		response.sendRedirect(request.getContextPath() + "/home");

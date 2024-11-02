@@ -57,11 +57,15 @@ public class User extends Person {
     }
     
     public boolean hasMembership() {
-    	return this.memberships.stream().filter(m -> m.getStatus().equals(Status.APPROVED) && m.isValid()).count() != 0;
+    	return this.memberships.stream().filter(m -> m.isValid()).count() != 0;
     }
     
-    public boolean membershipPending() {
-    	return this.memberships.stream().filter(m -> m.getStatus().equals(Status.PENDING) && m.isValid()).count() != 0;
+    public boolean hasMembershipPending() {
+    	return this.memberships.stream().filter(m -> m.isValid() && m.isPending()).count() != 0;
+    }
+    
+    public boolean hasvalidMembership() {
+    	return this.memberships.stream().filter(m -> m.isValid() && m.getStatus().equals(Status.APPROVED)).count() != 0;
     }
     
     public Membership getMembership() {
