@@ -1,45 +1,72 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>User Form</title>
-</head>
-<body>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<jsp:include page="../../../partials/header.jsp" />
+
+<div class="container">
 	<h1>New User</h1>
-	<form action="users" method="post">
-		<fieldset>
-			<input type="hidden" name="action" value="create" /> <label>ID:
-				<input type="text" name="username" />
-			</label><br /> <label>Role:</label> <select name="role" required>
-				<c:forEach var="role" items="${roles}">
-					<option value="${role}">${role}</option>
-				</c:forEach>
-			</select> <br /> <label>password: <input type="password" name="password" /></label><br />
-		</fieldset>
-		<br />
+	<hr>
+	<form class="w-full" action="users" method="post">
+	
+		<div class="d-flex gap-3">
+			<fieldset class="flex-grow-1">
+				<input type="hidden" name="action" value="create" />
+		         <div class="form-group">
+		             <label for="username">ID/Username:</label>
+			        <input type="text" class="form-control ${errorMessage != null ? 'is-invalid' : '' }" name="username" id="username" required />
+			        <span class="invalid-feedback">
+	                    ${errorMessage}
+	                </span>
+		         </div>
+		         <div class="form-group">
+		             <label for="password">Password:</label>
+			        <input type="password" class="form-control" name="password" id="password" required />
+		         </div>
+				<div class="form-group">
+	             	<label for="role">Role:</label>
+			        <select id="role" class="form-control" name="role" required>
+					<c:forEach var="role" items="${roles}">
+						<option value="${role}">${role}</option>
+					</c:forEach>
+			        </select>
+	         	</div>
+				
+				<div class="form-group">
+	             	<label for="villageId">Village:</label>
+			        <select id="villageId" class="form-control" name="villageId" required>
+					<c:forEach var="location" items="${locations}">
+						<option value="${location.id}">${location.code}: ${location.name}</option>
+					</c:forEach>
+			        </select>
+	         	</div>
+			</fieldset>
 
-		<fieldset>
-			<label>First name: <input type="text" name="firstname" /></label><br />
-			<label>Last name: <input type="text" name="lastname" /></label><br />
-			<label>Phone number: <input type="text" name="phone" /></label><br />
-			<label>Gender:</label>
-			<select name="gender" required>
-				<c:forEach var="gender" items="${genders}">
-					<option value="${gender}">${gender}</option>
-				</c:forEach>
-			</select> <br />
-			<label>Village:</label>
-			<select name="villageId" required>
-				<c:forEach var="location" items="${locations}">
-					<option value="${location.id}">${location.code}: ${location.name}</option>
-				</c:forEach>
-			</select> <br />
-
-		</fieldset>
-		<br>
-		<button type="submit">Create</button>
+			<fieldset  class="flex-grow-1">			
+		         <div class="form-group">
+		             <label for="firstname">First name:</label>
+			        <input type="text" class="form-control" name="firstname" id="firstname" required />
+		         </div>
+		         <div class="form-group">
+		             <label for="lastname">Last name:</label>
+			        <input type="text" class="form-control" name="lastname" id="lastname" required />
+		         </div>
+		         <div class="form-group">
+		             <label for="phone">Phone number:</label>
+			        <input type="text" class="form-control" name="phone" id="phone" required />
+		         </div>
+				<div class="form-group">
+	             	<label for="gender">Gender:</label>
+			        <select id="gender" class="form-control" name="gender" required>
+					<c:forEach var="gender" items="${genders}">
+						<option value="${gender}">${gender}</option>
+					</c:forEach>
+			        </select>
+	         	</div>
+	
+			</fieldset>
+		</div>
+       	<div class="text-end mt-2">
+       	<button type="submit" class="btn btn-primary">Create</button>
+       	</div>
 	</form>
-	<a href="users">Back to List</a>
-</body>
-</html>
+</div>
+
+<jsp:include page="../../../partials/footer.jsp" />

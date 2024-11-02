@@ -1,19 +1,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Book List</title>
-</head>
-<body>
-	<a href="${pageContext.request.contextPath}/">&larr; Back home</a>
+<jsp:include page="../../../partials/header.jsp" />
+
+<div class="container">
 	<h1>Book List</h1>
 	<p>Total books: ${books.size()}</p>
-	<p>
-		<a href="${pageContext.request.contextPath}/books?action=new">Add
-			New Book</a>
-	<p>
-	<table border="1">
+	<a class="btn btn-primary" href="${pageContext.request.contextPath}/books?action=new">Add New Book</a>
+	<hr>
+    <table class="table table-striped">
+	  <thead>
 		<tr>
 			<th>Title</th>
 			<th>Edition</th>
@@ -24,6 +18,8 @@
 			<th>Shelf</th>
 			<th>Actions</th>
 		</tr>
+	  </thead>
+	  <tbody>
 		<c:forEach var="book" items="${books}">
 			<tr>
 				<td>${book.title}</td>
@@ -34,17 +30,18 @@
 				<td>${book.publisherName}</td>
 				<td>${book.shelf.bookCategory}</td>
 				<td>
-					<button><a href="${pageContext.request.contextPath}/books?action=edit&id=${book.id}">Edit</a></button>
-					|
+					<a class="btn btn-secondary" href="${pageContext.request.contextPath}/books?action=edit&id=${book.id}">Edit</a></button>
 					<form action="${pageContext.request.contextPath}/books"
 						method="post" style="display: inline;">
 						<input type="hidden" name="action" value="delete" /> 
 						<input type="hidden" name="id" value="${book.id}" />
-						<button onclick="return confirm('Are you sure?')" type="submit">Delete</button>
+						<button class="btn btn-secondary" onclick="return confirm('Are you sure?')" type="submit">Delete</button>
 					</form>
 				</td>
 			</tr>
 		</c:forEach>
+		</tbody>
 	</table>
-</body>
-</html>
+</div>
+
+<jsp:include page="../../../partials/footer.jsp" />

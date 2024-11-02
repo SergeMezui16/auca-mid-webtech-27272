@@ -1,14 +1,13 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<html>
-<head>
-    <title>Locations</title>
-</head>
-<body>
-	<a href="${pageContext.request.contextPath}/">&larr; Back home</a>
-    <h1>Locations</h1>
-	<p>Total locations: ${locations.size()}</p>
-    <a href="${pageContext.request.contextPath}/locations?action=new">Add New Location</a>
-    <table border="1">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<jsp:include page="../../../partials/header.jsp" />
+
+<div class="container">
+    <h1>Locations List</h1>
+	<p>Total: ${locations.size()}</p>
+    <a class="btn btn-primary" href="${pageContext.request.contextPath}/locations?action=new">Add New Location</a>
+    <hr>
+    <table class="table table-striped">
+	  <thead>
         <tr>
             <th>Code</th>
             <th>Name</th>
@@ -17,6 +16,8 @@
             <th>Parent type</th>
             <th>Actions</th>
         </tr>
+	  </thead>
+	  <tbody>
         <c:forEach var="location" items="${locations}">
             <tr>
                 <td>${location.code}</td>
@@ -27,16 +28,17 @@
                  </td>
                 <td>${location.parent != null ? location.parent.type : 'N/A'}</td>
                 <td>
-                
-                    <button><a href="${pageContext.request.contextPath}/locations?action=edit&id=${location.id}">Edit</a></button> |
+                	<a class="btn btn-secondary" href="${pageContext.request.contextPath}/locations?action=edit&id=${location.id}">Edit</a>
                     <form action="${pageContext.request.contextPath}/locations" method="post" style="display:inline;">
                         <input type="hidden" name="action" value="delete"/>
                         <input type="hidden" name="id" value="${location.id}"/>
-                        <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+                        <button class="btn btn-secondary" type="submit" onclick="return confirm('Are you sure?')">Delete</button>
                     </form>
                 </td>
             </tr>
         </c:forEach>
+        </tbody>
     </table>
-</body>
-</html>
+</div>
+
+<jsp:include page="../../../partials/footer.jsp" />

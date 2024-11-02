@@ -1,12 +1,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<html>
-<head>
-    <title>Memberships</title>
-</head>
-<body>
-	<a href="${pageContext.request.contextPath}/">&larr; Back home</a>
-    <h1>Memberships</h1>
-    <table border="1">
+<jsp:include page="../../../partials/header.jsp" />
+
+<div class="container">
+    <h1>Memberships List</h1>
+	<p>Total: ${memberships.size()}</p>
+	<hr>
+    <table class="table table-striped">
+	  <thead>
         <tr>
             <th>Reader</th>
             <th>Membership type</th>
@@ -15,6 +15,8 @@
             <th>Issue</th>
             <th>Actions</th>
         </tr>
+	  </thead>
+	  <tbody>
         <c:forEach var="membership" items="${memberships}">
             <tr>
                 <td>${membership.reader.name}</td>
@@ -23,19 +25,23 @@
                 <td>${membership.registrationDate}</td>
                 <td>${membership.expiringTime}</td>
                 <td>
+                   	<c:if test="${membership.isPending() == true }">
                    	<form action="${pageContext.request.contextPath}/memberships" method="post" style="display:inline;">
                         <input type="hidden" name="action" value="approve"/>
                         <input type="hidden" name="id" value="${membership.id}"/>
-                        <button type="submit" onclick="return confirm('Are you sure?')">Approve</button>
+                        <button type="submit" class="btn btn-secondary" onclick="return confirm('Are you sure?')">Approve</button>
                     </form>
                     <form action="${pageContext.request.contextPath}/memberships" method="post" style="display:inline;">
                         <input type="hidden" name="action" value="reject"/>
                         <input type="hidden" name="id" value="${membership.id}"/>
-                        <button type="submit" onclick="return confirm('Are you sure?')">Reject</button>
+                        <button type="submit" class="btn btn-secondary" onclick="return confirm('Are you sure?')">Reject</button>
                     </form>
+                   	</c:if>
                 </td>
             </tr>
         </c:forEach>
+        </tbody>
     </table>
-</body>
-</html>
+</div>
+
+<jsp:include page="../../../partials/footer.jsp" />

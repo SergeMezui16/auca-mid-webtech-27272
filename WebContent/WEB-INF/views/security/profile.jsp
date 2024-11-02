@@ -1,97 +1,88 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Find user location</title>
-</head>
-<body>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<jsp:include page="../../../partials/header.jsp" />
+
+<div class="container">
 	<h1>Profile ${user.name }</h1>
 	
-	<a href="${pageContext.request.contextPath}/security?action=password">Change My password</a> |	
-	<a href="${pageContext.request.contextPath}/security?action=edit">Change My informations</a>
+	<a class="btn-primary btn" href="${pageContext.request.contextPath}/security?action=password">Change My password</a>	
+	<a class="btn-secondary btn" href="${pageContext.request.contextPath}/security?action=edit">Change My informations</a>
 	
-	<br>
-	<h3>Information</h3>
-	<table border="1">
-		<tr>
+	<hr>
+	<h3>Personal informations</h3>
+	<table class="table table-striped mb-5">
+	  <thead>
+        <tr>
 			<th>ID/Username</th>
-			<th>${user.username}</th>
-		</tr>
-		<tr>
 			<th>Role</th>
-			<th>${user.role}</th>
-		</tr>
-		<tr>
 			<th>First name</th>
-			<th>${user.firstName}</th>
-		</tr>
-		<tr>
 			<th>Last name</th>
-			<th>${user.lastName}</th>
-		</tr>
+            <th>Phone</th>
+            <th>Gender</th>
+        </tr>
+	  </thead>
+	  <tbody>
 		<tr>
-			<th>Phone</th>
-			<th>${user.phoneNumber}</th>
+			<td>${user.username}</td>
+			<td>${user.role}</td>
+			<td>${user.firstName}</td>
+			<td>${user.lastName}</td>
+			<td>${user.phoneNumber}</td>
+			<td>${user.gender}</td>
 		</tr>
-		<tr>
-			<th>Gender</th>
-			<th>${user.gender}</th>
-		</tr>
-	</table>
+	  </tbody>
+	 </table>
+	 
 	<h3>Location</h3>
-	<table border="1">
-		<tr>
+	<table class="table table-striped mb-5">
+	  <thead>
+        <tr>
+			<th>Name</th>
 			<th>Village</th>
-			<th>${user.village.name}</th>
-		</tr>
-		<tr>
 			<th>Cell</th>
-			<th>${user.village.parent.name}</th>
-		</tr>
-		<tr>
 			<th>Sector</th>
-			<th>${user.village.parent.parent.name}</th>
-		</tr>
+            <th>District</th>
+            <th>Province</th>
+        </tr>
+	  </thead>
+	  <tbody>
 		<tr>
-			<th>District</th>
-			<th>${user.village.parent.parent.parent.name}</th>
+			<td>${user.name}</td>
+			<td>${user.village.name}</td>
+			<td>${user.village.parent.name}</td>
+			<td>${user.village.parent.parent.name}</td>
+			<td>${user.village.parent.parent.parent.name}</td>
+			<td>${user.village.parent.parent.parent.parent.name}</td>
 		</tr>
-		<tr>
-			<th>Province</th>
-			<th>${user.village.parent.parent.parent.parent.name}</th>
-		</tr>
-	</table>
+	  </tbody>
+	 </table>
 	
-	<c:if test="${user.membershipPending() }">
+	<c:if test="${user.hasMembershipPending() == true }">
 	<h3>your memberships is pending...</h3>
 	</c:if>
 
-	<c:if test="${user.hasMembership() }">
+	<c:if test="${user.hasMembership() == true}">
 	<h3>Memberships</h3>
-	<table border="1">
-		<tr>
+	
+	<table class="table table-striped mb-5	">
+	  <thead>
+        <tr>
 			<th>Type</th>
-			<th>${user.membership.type.name}</th>
-		</tr>
-		<tr>
 			<th>Max</th>
-			<th>${user.membership.type.maxBooks}</th>
-		</tr>
-		<tr>
 			<th>Subscription date</th>
-			<th>${user.membership.registrationDate}</th>
-		</tr>
-		<tr>
 			<th>Issue date</th>
-			<th>${user.membership.registrationDate}</th>
-		</tr>
+            <th>Status</th>
+        </tr>
+	  </thead>
+	  <tbody>
 		<tr>
-			<th>Status</th>
+			<th>${user.membership.type.name}</th>
+			<th>${user.membership.type.maxBooks}</th>
+			<th>${user.membership.registrationDate}</th>
+			<th>${user.membership.expiringTime}</th>
 			<th>${user.membership.status}</th>
 		</tr>
-	</table>
+	  </tbody>
+	 </table>
 	</c:if>
-</body>
-</html>
-
+</div>
+<jsp:include page="../../../partials/footer.jsp" />

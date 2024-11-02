@@ -1,28 +1,36 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Create Shelf</title>
-</head>
-<body>
+<jsp:include page="../../../partials/header.jsp" />
+
+<div class="container">
     <h1>Create Shelf</h1>
-    <form action="${pageContext.request.contextPath}/shelves" method="post">
+    <hr>
+    <form action="${pageContext.request.contextPath}/shelves" style="max-width: 400px;" method="post">
         <input type="hidden" name="action" value="create"/>
-        <label for="bookCategory">Book Category:</label>
-        <input type="text" id="bookCategory" name="bookCategory" required>
-        <br><br>
-        <label for="initialStock">Initial Stock:</label>
-        <input type="number" id="initialStock" name="initialStock" required>
-        <br><br>
-        <label for="room">Room:</label>
-        <select id="room" name="roomId" required>
-            <c:forEach var="room" items="${rooms}">
-                <option value="${room.id}">${room.name}</option>
-            </c:forEach>
-        </select>
-        <br><br>
-        <button type="submit">Create Shelf</button>
+        
+         <div class="form-group">
+             <label for="roomId">Room:</label>
+	        <select id="roomId" class="form-control ${errorMessage != null ? 'is-invalid' : '' }" name="roomId" required>
+	            <c:forEach var="room" items="${rooms}">
+	                <option value="${room.id}">${room.name}</option>
+	            </c:forEach>
+	        </select>
+             <span class="invalid-feedback">${errorMessage}</span>
+         </div>
+        
+         <div class="form-group">
+             <label for="bookCategory">Book category:</label>
+	        <input type="text" class="form-control" name="bookCategory" id="bookCategory" required />
+         </div>
+        
+         <div class="form-group">
+             <label for="initialStock">Initial stock:</label>
+	        <input type="number" class="form-control" name="initialStock" id="initialStock" required />
+         </div>
+
+       	<div class="text-end mt-2">
+       		<button type="submit" class="btn btn-primary">Create</button>
+       	</div>
     </form>
-</body>
-</html>
+</div>
+
+<jsp:include page="../../../partials/footer.jsp" />

@@ -91,14 +91,14 @@ public class UserServlet extends HttpServlet {
 	private void find(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println(request.getParameter("phone"));
 		User user = null;
-		
+
 		try {
 			user = UserRepository.findByPhone(request.getParameter("phone"));
-		} catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println(request.getParameter("phone") + ": Not found.");
 		}
-		
-		request.setAttribute("user", user);
+
+		request.setAttribute("result", user);
 		request.setAttribute("phone", request.getParameter("phone"));
 		request.getRequestDispatcher("/WEB-INF/views/users/find.jsp").forward(request, response);
 	}
@@ -107,11 +107,22 @@ public class UserServlet extends HttpServlet {
 		return UserRepository.findById(request.getParameter("id"));
 	}
 
-	private void post(HttpServletRequest request, HttpServletResponse response) {
-		UserRepository.create(request.getParameter("username"), request.getParameter("firstname"),
-				Gender.valueOf(request.getParameter("gender")), request.getParameter("lastname"),
-				request.getParameter("phone"), request.getParameter("password"),
-				Role.valueOf(request.getParameter("role")), UUID.fromString(request.getParameter("villageId")));
+	private void post(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		User user = UserRepository.findById(request.getParameter("username"));
+
+		if (user == null) {
+			UserRepository.create(request.getParameter("username"), request.getParameter("firstname"),
+					Gender.valueOf(request.getParameter("gender")), request.getParameter("lastname"),
+					request.getParameter("phone"), request.getParameter("password"),
+					Role.valueOf(request.getParameter("role")), UUID.fromString(request.getParameter("villageId")));
+			return;
+		}
+		
+		request.setAttribute("errorMessage", "This username (" + request.getParameter("username") + ") is already taken by another user.");
+		request.setAttribute("locations", LocationRepository.findAllVillages());
+		request.setAttribute("roles", Role.values());
+		request.setAttribute("genders", Gender.values());
+		request.getRequestDispatcher("/WEB-INF/views/users/new.jsp").forward(request, response);
 	}
 
 	private void put(HttpServletRequest request, HttpServletResponse response) {
@@ -132,7 +143,7 @@ public class UserServlet extends HttpServlet {
 		if (id == null)
 			return;
 
-		System.out.println(request.getParameter("role") + "  " +  request.getParameter("username"));
+		System.out.println(request.getParameter("role") + "  " + request.getParameter("username"));
 		UserRepository.updateCredentials(id, Role.valueOf(request.getParameter("role")));
 	}
 

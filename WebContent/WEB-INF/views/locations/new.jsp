@@ -1,34 +1,46 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Create Location</title>
-</head>
-<body>
-	<h1>Create Location</h1>
-	<form action="${pageContext.request.contextPath}/locations"
-		method="post">
-		<input type="hidden" name="action" value="create" /> 
-		<label>Location
-			Type:</label> <select id="selectType" name="type" required>
-			<c:forEach var="type" items="${types}">
-				<option value="${type}">${type}</option>
-			</c:forEach>
-		</select><br /> 
-		<input
-			type="hidden" name="id" /> <label>Location Code:</label> <input
-			type="text" name="code" required /><br /> <label>Location
-			Name:</label> <input type="text" name="name" required /><br /> 
-			<label>Parent Location:</label> <select id="parentId" name="parentId">
-			<option data-type="NULL" value="" selected="selected">NULL</option>
-			<c:forEach var="loc" items="${locations}">
-				<option data-type="${loc.type}" value="${loc.id}">${loc.type}
-					: ${loc.name}</option>
-			</c:forEach>
-		</select><br />
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<jsp:include page="../../../partials/header.jsp" />
 
-		<button type="submit">Create</button>
+<div class="container">
+	<h1>Create Location</h1>
+    <hr>
+	<form action="${pageContext.request.contextPath}/locations"
+		style="max-width: 400px;" method="post">
+		<input type="hidden" name="action" value="create" /> 
+		
+         <div class="form-group">
+             <label for="selectType">Location type:</label>
+	        <select id="selectType" class="form-control" name="type" required>
+				<c:forEach var="type" items="${types}">
+					<option value="${type}">${type}</option>
+				</c:forEach>
+	        </select>
+         </div>
+         
+         
+         <div class="form-group">
+             <label for="code">Code:</label>
+	        <input type="text" class="form-control" name="code" id="code" required />
+         </div>
+         
+         <div class="form-group">
+             <label for="name">Name:</label>
+	        <input type="text" class="form-control" name="name" id="name" required />
+         </div>
+         <div class="form-group">
+             <label for="parentId">Location type:</label>
+	        <select id="parentId" class="form-control" name="parentId" required>
+				<option data-type="NULL" value="" selected="selected">NULL</option>
+				<c:forEach var="loc" items="${locations}">
+					<option data-type="${loc.type}" value="${loc.id}">${loc.type}
+						: ${loc.name}</option>
+				</c:forEach>
+	        </select>
+         </div>
+
+       	<div class="text-end mt-2">
+       		<button type="submit" class="btn btn-primary">Create</button>
+       	</div>
 	</form>
 	
 	<script type="text/javascript">
@@ -66,5 +78,5 @@
 		
 		selectType.addEventListener("change", () => handleChange())
 	</script>
-</body>
-</html>
+</div>
+<jsp:include page="../../../partials/footer.jsp" />

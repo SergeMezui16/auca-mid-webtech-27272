@@ -1,21 +1,29 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Return book</title>
-</head>
-<body>
+<jsp:include page="../../../partials/header.jsp" />
+
+<div class="container">
     <h1>Return Book ${borrower.book.title}</h1>
-    <p>Reader: ${borrower.reader.name}</p>
-    <p>Due date: ${borrower.dueDate}</p>
-    <form action="borrowers" method="post">
+    <p>Reader: ${borrower.reader.name} <br>Reserved date: ${borrower.date} <br>Due date: ${borrower.dueDate}</p>
+    <hr>
+    <form action="borrowers" style="max-width: 400px;" method="post">
         <input type="hidden" name="action" value="return" />
         <input type="hidden" name="id" value="${borrower.id}" />
-        <label>Return date: <input type="date" name="returnDate" /></label><br/>
-        <label>Late Fees: <input type="number" name="lateChargeFees" value="0"/></label><br/>
         
-        <button type="submit">Return</button>
+        
+         <div class="form-group">
+             <label for="returnDate">Return date:</label>
+	        <input type="date" class="form-control" name="returnDate" id="returnDate" required />
+         </div>
+         <div class="form-group">
+             <label for="lateChargeFees">Late Fees:</label>
+	        <input type="number" class="form-control" name="lateChargeFees" id="lateChargeFees" value="0" required />
+         </div>
+        
+        
+       	<div class="text-end mt-2">
+       	<button type="submit" class="btn btn-primary">Return</button>
+       	</div>
     </form>
-</body>
-</html>
+</div>
+
+<jsp:include page="../../../partials/footer.jsp" />

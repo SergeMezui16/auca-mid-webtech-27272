@@ -1,32 +1,30 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Shelves of Room ${room.name} </title>
-</head>
-<body>
-	<a href="${pageContext.request.contextPath}/rooms">&larr; Back</a>
-    <h1>Shelf List of Room ${room.name}</h1>
+<jsp:include page="../../../partials/header.jsp" />
+
+<div class="container">
+    <h1>Shelves List of Room ${room.name}</h1>
 	<p>Total shelves: ${shelves.size()}</p>
-	<p>
-    <table border="1">
+	<hr>
+    <table class="table table-striped">
+	  <thead>
         <tr>
             <th>Book Category</th>
             <th>Available Stock</th>
             <th>Borrowed Number</th>
             <th>Initial Stock</th>
-            <th>Room</th>
         </tr>
+	  </thead>
+	  <tbody>
         <c:forEach var="shelf" items="${shelves}">
             <tr>
                 <td>${shelf.bookCategory}</td>
-                <td>${shelf.availableStock}</td>
-                <td>${shelf.borrowedNumber}</td>
+                <td>${shelf.getAvailableNumber()}</td>
+                <td>${shelf.getBorrowedNumber()}</td>
                 <td>${shelf.initialStock}</td>
-                <td>${shelf.room.name}</td>
             </tr>
         </c:forEach>
+        </tbody>
     </table>
-</body>
-</html>
+</div>
+
+<jsp:include page="../../../partials/footer.jsp" />

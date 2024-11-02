@@ -14,7 +14,7 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+<nav class="navbar navbar-expand-lg bg-dark mb-4" data-bs-theme="dark">
   <div class="container">
     <a class="navbar-brand" href="${pageContext.request.contextPath}/">AUCA MLS</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">

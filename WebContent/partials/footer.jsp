@@ -1,7 +1,7 @@
 
     <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 My Website</p>
+    <footer class="text-center mt-5">
+        <p>&copy; AUCA Library Management System.</p>
     </footer>
 </body>
 </html>

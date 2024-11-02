@@ -1,18 +1,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>List of Shelves</title>
-</head>
-<body>
-	<a href="${pageContext.request.contextPath}/">&larr; Back home</a>
+<jsp:include page="../../../partials/header.jsp" />
+
+<div class="container">
     <h1>Shelf List</h1>
-	<p>Total shelves: ${shelves.size()}</p>
-	<p>
-    <a href="${pageContext.request.contextPath}/shelves?action=new">Create New Shelf</a>
-	<p>
-    <table border="1">
+	<p>Total: ${shelves.size()}</p>
+    <a class="btn btn-primary" href="${pageContext.request.contextPath}/shelves?action=new">Create New Shelf</a>
+
+	<hr>
+    <table class="table table-striped">
+	  <thead>
         <tr>
             <th>Book Category</th>
             <th>Available Stock</th>
@@ -21,6 +17,8 @@
             <th>Room</th>
             <th>Actions</th>
         </tr>
+	  </thead>
+	  <tbody>
         <c:forEach var="shelf" items="${shelves}">
             <tr>
                 <td>${shelf.bookCategory}</td>
@@ -29,15 +27,17 @@
                 <td>${shelf.initialStock}</td>
                 <td>${shelf.room.name}</td>
                 <td>
-                    <button><a href="${pageContext.request.contextPath}/shelves?action=edit&id=${shelf.id}">Edit</a></button> |
+                    <a class="btn btn-secondary" href="${pageContext.request.contextPath}/shelves?action=edit&id=${shelf.id}">Edit</a>
                     <form action="${pageContext.request.contextPath}/shelves" method="post" style="display:inline;">
                         <input type="hidden" name="action" value="delete"/>
                         <input type="hidden" name="id" value="${shelf.id}"/>
-                        <button type="submit">Delete</button>
+                        <button class="btn btn-secondary" type="submit">Delete</button>
                     </form>
                 </td>
             </tr>
         </c:forEach>
+        </tbody>
     </table>
-</body>
-</html>
+</div>
+
+<jsp:include page="../../../partials/footer.jsp" />

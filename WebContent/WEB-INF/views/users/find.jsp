@@ -1,51 +1,47 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Find user location</title>
-</head>
-<body>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<jsp:include page="../../../partials/header.jsp" />
+
+<div class="container">
 	<h1>Find user location</h1>
-	<form method="get" action="${pageContext.request.contextPath}/users">
+	<form class="w-full" method="get" action="${pageContext.request.contextPath}/users">
 		<input type="hidden" name="action" value="find">
-		<input type="search" name="phone" value="${pageContext.request.getAttribute('phone') }">
-		<button>search</button>
+		
+	    <div class="input-group mb-3">
+	      <input type="search" name="phone" value="${phone }" class="form-control" placeholder="Find user location from phone number...">
+	      <button class="btn btn-primary" type="submit" id="button-addon2">Search</button>
+	    </div>
 	</form>
 	<br>
 	
-		<c:if test="${pageContext.request.getAttribute(\"user\") != null }">
-			<table border="1">
-				<tr>
-					<th>Name</th>
-					<th>${user.name}</th>
-				</tr>
-				<tr>
-					<th>Village</th>
-					<th>${user.village.name}</th>
-				</tr>
-				<tr>
-					<th>Cell</th>
-					<th>${user.village.parent.name}</th>
-				</tr>
-				<tr>
-					<th>Sector</th>
-					<th>${user.village.parent.parent.name}</th>
-				</tr>
-				<tr>
-					<th>District</th>
-					<th>${user.village.parent.parent.parent.name}</th>
-				</tr>
-				<tr>
-					<th>Province</th>
-					<th>${user.village.parent.parent.parent.parent.name}</th>
-				</tr>
-			</table>
-		</c:if>
-		<c:if test="${pageContext.request.getAttribute(\"user\") == null }">
-			<p>No one found!</p>
-		</c:if>
+	<c:if test="${result != null }">		
+    <table class="table table-striped">
+	  <thead>
+        <tr>
+			<th>Name</th>
+			<th>Village</th>
+			<th>Cell</th>
+			<th>Sector</th>
+            <th>District</th>
+            <th>Province</th>
+        </tr>
+	  </thead>
+	  <tbody>
+		<tr>
+			<td>${result.name}</td>
+			<td>${result.village.name}</td>
+			<td>${result.village.parent.name}</td>
+			<td>${result.village.parent.parent.name}</td>
+			<td>${result.village.parent.parent.parent.name}</td>
+			<td>${result.village.parent.parent.parent.parent.name}</td>
+		</tr>
+	  </tbody>
+	 </table>
+	</c:if>
 	
-</body>
-</html>
+		<c:if test="${result == null }">
+			<p class="text-muted text-center">No one found!</p>
+		</c:if>
+</div>
+
+<jsp:include page="../../../partials/footer.jsp" />
 

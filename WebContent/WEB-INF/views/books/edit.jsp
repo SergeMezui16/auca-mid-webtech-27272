@@ -1,35 +1,47 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Book Form</title>
-</head>
-<body>
+<jsp:include page="../../../partials/header.jsp" />
+
+<div class="container">
     <h1>Edit Book</h1>
-    <% String errorMessage = (String) request.getAttribute("errorMessage"); %>
-	<% if (errorMessage != null) { %>
-	    <div style="color:red;">
-	        <%= errorMessage %>
-	    </div>
-	<% } %>
-    <form action="books" method="post">
+    <hr>
+    <form action="books"  style="max-width: 400px;" method="post">
         <input type="hidden" name="action" value="update" />
         <input type="hidden" name="id" value="${book.id}" />
-        <label>Title: <input type="text" name="title" value="${book.title}" /></label><br/>
-        <label>Edition: <input type="number" name="edition" value="${book.edition}" /></label><br/>
-        <label>ISBN Code: <input type="text" name="ISBNCode" value="${book.ISBNCode}" /></label><br/>
-        <label>Publication Year: <input type="number" name="publicationYear" value="${book.publicationYear}" /></label><br/>
-        <label>Publisher Name: <input type="text" name="publisherName" value="${book.publisherName}" /></label><br/>
-        <label>Shelf ID:</label>
-        <select id="shelfId" name="shelfId" required>
-            <c:forEach var="shelf" items="${shelves}">
-                <option <c:if test="${shelf.id == book.shelf.id}">selected="true"</c:if> value="${shelf.id}">${shelf.bookCategory}</option>
-            </c:forEach>
-        </select>
-        <br><br>
-        <button type="submit">Update</button>
+         <div class="form-group">
+             <label for="shelfId">Shelf	:</label>
+	        <select id="shelfId" class="form-control ${errorMessage != null ? 'is-invalid' : '' }" name="shelfId" required>
+	            <c:forEach var="shelf" items="${shelves}">
+	                <option  <c:if test="${shelf.id == book.shelf.id}">selected="true"</c:if> value="${shelf.id}">${shelf.bookCategory}</option>
+	            </c:forEach>
+	        </select>
+             <span class="invalid-feedback">${errorMessage}</span>
+         </div>
+         <div class="form-group">
+             <label for="title">Title:</label>
+	        <input type="text" class="form-control" value="${book.title}" name="title" id="title" required />
+         </div>
+         <div class="form-group">
+             <label for="edition">Edition:</label>
+	        <input type="number" class="form-control" value="${book.edition}" name="edition" id="edition" required />
+         </div>
+         <div class="form-group">
+             <label for="publicationYear">Publisher Name:</label>
+	        <input type="text" class="form-control" value="${book.publisherName}" name="publisherName" id="publisherName" required />
+         </div>
+         
+         <div class="form-group">
+             <label for="publicationYear">Publisher year:</label>
+	        <input type="number" class="form-control" value="${book.publicationYear}" name="publicationYear" id="publicationYear" required />
+         </div>
+         <div class="form-group">
+             <label for="ISBNCode">ISBN Code:</label>
+	        <input type="text" class="form-control" value="${book.ISBNCode}" name="ISBNCode" id="ISBNCode" required />
+         </div>
+         
+       	<div class="text-end mt-2">
+       	<button type="submit" class="btn btn-primary">Update</button>
+       	</div>
     </form>
-    <a href="books">Back to List</a>
-</body>
-</html>
+</div>
+
+<jsp:include page="../../../partials/footer.jsp" />

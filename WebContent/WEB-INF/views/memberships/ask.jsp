@@ -1,11 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Ask for Membership</title>
-</head>
-<body>
+<jsp:include page="../../../partials/header.jsp" />
+
+<div class="container">
 	<h1>Ask for Membership</h1>
 	<form action="${pageContext.request.contextPath}/memberships"
 		method="post">
@@ -17,5 +13,6 @@
 		
 		<button type="submit">Submit</button>
 	</form>
-</body>
-</html>
+</div>
+
+<jsp:include page="../../../partials/footer.jsp" />
