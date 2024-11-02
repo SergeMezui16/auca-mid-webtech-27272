@@ -61,6 +61,10 @@
 			</div>
 			            
             <div class="text-center mt-3">
+				<p>You don't have an account ? <a href="${pageContext.request.contextPath}/register">Register here</a></p>
+            </div>
+			            
+            <div class="text-center mt-3">
 				<c:if test="${auth != null}">
 				<p>You are already logged as ${auth}.<br> Do you want to login as someone else or <a href="${pageContext.request.contextPath}/">go back home</a></p>
 				</c:if>
