@@ -73,7 +73,7 @@ public class User extends Person {
     }
     
     public boolean canBorrowBook() {
-    	return this.role.equals(Role.STUDENT) || this.role.equals(Role.STUDENT);
+    	return this.role.equals(Role.TEACHER) || this.role.equals(Role.STUDENT);
     }
     
     public boolean canWrite() {
@@ -81,7 +81,7 @@ public class User extends Person {
     }
     
     public boolean canRead() {
-    	return !this.role.equals(Role.STUDENT) && !this.role.equals(Role.STUDENT);
+    	return !canBorrowBook();
     }
 
 	public String getUsername() {

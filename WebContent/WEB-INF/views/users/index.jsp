@@ -4,7 +4,7 @@
 <div class="container">
 	<h1>User List</h1>
 	<p>Total users: ${users.size()}</p>
-	<a class="btn btn-primary" href="${pageContext.request.contextPath}/users?action=new">Add New User</a>
+	<c:if test="${auth.canWrite()}"><a class="btn btn-primary" href="${pageContext.request.contextPath}/users?action=new">Add New User</a></c:if>
 	<hr>
     <table class="table table-striped">
 	  <thead>
@@ -16,7 +16,7 @@
 			<th>Gender</th>
 			<th>Phone number</th>
 			<th>Village</th>
-			<th>Actions</th>
+			<c:if test="${auth.canWrite()}"><th>Actions</th></c:if>
 		</tr>
 	  </thead>
 	  <tbody>
@@ -29,6 +29,7 @@
 				<td>${user.gender}</td>
 				<td>${user.phoneNumber}</td>
 				<td>${user.village.name}</td>
+				<c:if test="${auth.canWrite()}">
 				<td>
 					<a class="btn btn-secondary" href="${pageContext.request.contextPath}/users?action=edit&id=${user.username}">Edit profile</a>
 					<form action="${pageContext.request.contextPath}/users"
@@ -40,6 +41,7 @@
 					<a class="btn btn-secondary"  href="${pageContext.request.contextPath}/users?action=id&id=${user.username}">Change role</a>
 					<a class="btn btn-secondary"  href="${pageContext.request.contextPath}/users?action=password&id=${user.username}">Change password</a>
 				</td>
+				</c:if>
 			</tr>
 		</c:forEach>
 		</tbody>

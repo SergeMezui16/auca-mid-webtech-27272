@@ -4,7 +4,7 @@
 <div class="container">
 	<h1>Book List</h1>
 	<p>Total books: ${books.size()}</p>
-	<a class="btn btn-primary" href="${pageContext.request.contextPath}/books?action=new">Add New Book</a>
+	<c:if test="${auth.canWrite()}"><a class="btn btn-primary" href="${pageContext.request.contextPath}/books?action=new">Add New Book</a></c:if>
 	<hr>
     <table class="table table-striped">
 	  <thead>
@@ -16,7 +16,7 @@
 			<th>Publication Year</th>
 			<th>Publisher Name</th>
 			<th>Shelf</th>
-			<th>Actions</th>
+			<c:if test="${auth.canWrite()}"><th>Actions</th></c:if>
 		</tr>
 	  </thead>
 	  <tbody>
@@ -29,6 +29,7 @@
 				<td>${book.publicationYear}</td>
 				<td>${book.publisherName}</td>
 				<td>${book.shelf.bookCategory}</td>
+				<c:if test="${auth.canWrite()}">
 				<td>
 					<a class="btn btn-secondary" href="${pageContext.request.contextPath}/books?action=edit&id=${book.id}">Edit</a></button>
 					<form action="${pageContext.request.contextPath}/books"
@@ -38,6 +39,7 @@
 						<button class="btn btn-secondary" onclick="return confirm('Are you sure?')" type="submit">Delete</button>
 					</form>
 				</td>
+				</c:if>
 			</tr>
 		</c:forEach>
 		</tbody>

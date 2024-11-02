@@ -13,7 +13,7 @@
             <th>Status</th>
             <th>Start at</th>
             <th>Issue</th>
-            <th>Actions</th>
+            <c:if test="${auth.canWrite()}"><th>Actions</th></c:if>
         </tr>
 	  </thead>
 	  <tbody>
@@ -24,6 +24,7 @@
                 <td>${membership.status}</td>
                 <td>${membership.registrationDate}</td>
                 <td>${membership.expiringTime}</td>
+                <c:if test="${auth.canWrite()}">
                 <td>
                    	<c:if test="${membership.isPending() == true }">
                    	<form action="${pageContext.request.contextPath}/memberships" method="post" style="display:inline;">
@@ -38,6 +39,7 @@
                     </form>
                    	</c:if>
                 </td>
+                </c:if>
             </tr>
         </c:forEach>
         </tbody>

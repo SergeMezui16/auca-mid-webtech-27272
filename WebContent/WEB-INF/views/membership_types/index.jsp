@@ -4,17 +4,15 @@
 <div class="container">
     <h1>Membership types List</h1>
 	<p>Total: ${membershipTypes.size()}</p>
-    <a class="btn btn-primary" href="${pageContext.request.contextPath}/membership_types?action=new">Add New Membership Type</a>
+    <c:if test="${auth.canWrite()}"><a class="btn btn-primary" href="${pageContext.request.contextPath}/membership_types?action=new">Add New Membership Type</a></c:if>
 	<hr>
     <table class="table table-striped">
 	  <thead>
         <tr>
-        <tr>
             <th>Name</th>
             <th>Price</th>
             <th>Max Book</th>
-            <th>Actions</th>
-        </tr>
+            <c:if test="${auth.canWrite()}"><th>Actions</th></c:if>
         </tr>
 	  </thead>
 	  <tbody>
@@ -23,6 +21,7 @@
                 <td>${membershipType.name}</td>
                 <td>${membershipType.price}</td>
                 <td>${membershipType.maxBooks}</td>
+                <c:if test="${auth.canWrite()}">
                 <td>
                     <a  class="btn btn-secondary" href="${pageContext.request.contextPath}/membership_types?action=edit&id=${membershipType.id}">Edit</a>
                     <form action="${pageContext.request.contextPath}/membership_types" method="post" style="display:inline;">
@@ -31,6 +30,7 @@
                         <button class="btn btn-secondary" type="submit" onclick="return confirm('Are you sure?')">Delete</button>
                     </form>
                 </td>
+                </c:if>
             </tr>
         </c:forEach>
         </tbody>

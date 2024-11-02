@@ -4,7 +4,7 @@
 <div class="container">
     <h1>Shelf List</h1>
 	<p>Total: ${shelves.size()}</p>
-    <a class="btn btn-primary" href="${pageContext.request.contextPath}/shelves?action=new">Create New Shelf</a>
+    <c:if test="${auth.canWrite()}"><a class="btn btn-primary" href="${pageContext.request.contextPath}/shelves?action=new">Create New Shelf</a></c:if>
 
 	<hr>
     <table class="table table-striped">
@@ -15,7 +15,7 @@
             <th>Borrowed Number</th>
             <th>Initial Stock</th>
             <th>Room</th>
-            <th>Actions</th>
+            <c:if test="${auth.canWrite()}"><th>Actions</th></c:if>
         </tr>
 	  </thead>
 	  <tbody>
@@ -26,6 +26,7 @@
                 <td>${shelf.getBorrowedNumber()}</td>
                 <td>${shelf.initialStock}</td>
                 <td>${shelf.room.name}</td>
+                <c:if test="${auth.canWrite()}">
                 <td>
                     <a class="btn btn-secondary" href="${pageContext.request.contextPath}/shelves?action=edit&id=${shelf.id}">Edit</a>
                     <form action="${pageContext.request.contextPath}/shelves" method="post" style="display:inline;">
@@ -34,6 +35,7 @@
                         <button class="btn btn-secondary" type="submit">Delete</button>
                     </form>
                 </td>
+                </c:if>
             </tr>
         </c:forEach>
         </tbody>

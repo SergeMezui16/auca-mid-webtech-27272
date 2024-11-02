@@ -31,6 +31,7 @@
         <li class="nav-item">
           <a class="nav-link" href="#"></a>
         </li>
+        <c:if test="${auth.canRead() }">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Books</a>
           <div class="dropdown-menu">
@@ -54,12 +55,15 @@
             <a class="dropdown-item" href="${pageContext.request.contextPath}/locations">Locations</a>
           </div>
         </li>
+        </c:if>
       </ul>
-      <form class="d-flex" method="get" action="${pageContext.request.contextPath}/users">
-        <input class="form-control me-sm-2" type="search" name="phone" placeholder="Search by phone number">
-		<input type="hidden" name="action" value="find">
-        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-      </form>
+      	<c:if test="${auth.canWrite() }">
+      	<form class="d-flex" method="get" action="${pageContext.request.contextPath}/users">
+	        <input class="form-control me-sm-2" type="search" name="phone" placeholder="Search by phone number">
+			<input type="hidden" name="action" value="find">
+	        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+	      </form>
+      	</c:if>
 		<form
 			action="${pageContext.request.contextPath}/security?action=logout"
 			method="post" class="mx-2">

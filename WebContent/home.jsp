@@ -6,6 +6,7 @@
 	<h2 id="role">${auth.role}</h2>
 	<hr>
 	
+	<c:if test="${auth.canWrite()}">
 	<h2>Pending Memberships </h2>
 	<a href="memberships">See more</a>
 	<table class="table table-striped">
@@ -30,7 +31,9 @@
         </c:forEach>
 	  </tbody>
 	</table>
+	</c:if>
 	
+	<c:if test="${auth.canBorrowBook()}">
 	<c:if test="${auth.hasMembershipPending() == true}">
 		<h2>Your membership is pending</h2>
 		<p>Someone is validating your subscription, It will be approved soon. </p>
@@ -71,13 +74,6 @@
 		</c:forEach>
 	</div>
 	</c:if>
-	
-	
-	<div class="d-flex gap-3">
-		<a href="rooms">Rooms</a><a href="shelves">Shelves</a><a href="books">Books</a><a
-			href="locations">Locations</a><a href="users">Users</a><a
-			href="membership_types">MembershipType</a> <a href="memberships">Memberships</a><a
-			href="borrows">Borrow a book</a><a href="borrowers">Borrowers</a>
-	</div>
+	</c:if>
 </div>
 <jsp:include page="partials/footer.jsp" />

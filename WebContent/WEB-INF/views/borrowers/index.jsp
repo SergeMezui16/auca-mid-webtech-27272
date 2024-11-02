@@ -15,7 +15,7 @@
 			<th>Due Date</th>
 			<th>Fees</th>
 			<th>Return Date</th>
-			<th>Actions</th>
+			<c:if test="${auth.canWrite()}"><th>Actions</th></c:if>
 		</tr>
 	  </thead>
 	  <tbody>
@@ -28,6 +28,7 @@
 				<td>${borrower.dueDate}</td>
 				<td>${borrower.lateChargeFees}</td>
 				<td>${borrower.returnDate}</td>
+				<c:if test="${auth.canWrite()}">
 				<td>
 					<c:if test="${borrower.canBorrow()}">
 					<form action="${pageContext.request.contextPath}/borrowers"
@@ -41,6 +42,7 @@
 						<a class="btn btn-secondary" href="${pageContext.request.contextPath}/borrowers?action=return&id=${borrower.id}">Return</a>
 					</c:if>
 				</td>
+				</c:if>
 			</tr>
 		</c:forEach>
 		</tbody>
