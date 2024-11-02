@@ -2,8 +2,8 @@
 <jsp:include page="partials/header.jsp" />
 
 <div class="container">
-	<h1 class="display-2">Hello ${user.name}!</h1>
-	<h2 id="role">${user.role}</h2>
+	<h1 class="display-2">Hello ${auth.name}!</h1>
+	<h2 id="role">${auth.role}</h2>
 	<hr>
 	
 	<h2>Pending Memberships </h2>
@@ -31,13 +31,13 @@
 	  </tbody>
 	</table>
 	
-	<c:if test="${user.hasMembershipPending() == true}">
+	<c:if test="${auth.hasMembershipPending() == true}">
 		<h2>Your membership is pending</h2>
 		<p>Someone is validating your subscription, It will be approved soon. </p>
 	</c:if>
 	
 	
-	<c:if test="${user.hasMembership() == true}">
+	<c:if test="${auth.hasMembership() == true}">
 		<div>
 			<h2>You can borrow a book and see what to do here!</h2>
 			<p>take a look on the available book to be reserve an picked later.</p>
@@ -46,7 +46,7 @@
 		</div>
 	</c:if>
 
-	<c:if test="${user.hasMembership() == false}">
+	<c:if test="${auth.hasMembership() == false}">
 	
 	<h2>You don't have membership yet! Subscribe now!</h2>
 	<div class="d-flex gap-3 ">

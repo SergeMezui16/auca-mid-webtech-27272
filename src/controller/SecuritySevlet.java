@@ -8,12 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import entity.Gender;
 import entity.User;
 import repository.LocationRepository;
 import repository.UserRepository;
+import utils.SessionManager;
 
 @WebServlet("/security")
 public class SecuritySevlet extends HttpServlet {
@@ -66,28 +66,25 @@ public class SecuritySevlet extends HttpServlet {
 	}
 
 	private void put(HttpServletRequest request, HttpServletResponse response) {
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        
+        User user = SessionManager.getAuth(request);
 
 		user = UserRepository.updateProfile(user.getUsername(), request.getParameter("firstname"),
 				Gender.valueOf(request.getParameter("gender")), request.getParameter("lastname"),
 				request.getParameter("phone"), UUID.fromString(request.getParameter("villageId")));
 		
-		session.setAttribute("user", user);
+		SessionManager.setAuth(request, user);
 	}
 
 	private void changePassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String oldPassword = request.getParameter("oldPassword");
         String newPassword = request.getParameter("newPassword");
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = SessionManager.getAuth(request);
         
         try {
         	if (user != null && UserRepository.checkPassword(oldPassword, user.getPassword())) {
                 UserRepository.updatePassword(user.getUsername(), newPassword);
                 
-                session.setAttribute("user", user);
+                SessionManager.setAuth(request, user);
                 return;
             }
             
@@ -101,10 +98,7 @@ public class SecuritySevlet extends HttpServlet {
 	}
 
 	private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-		if (session != null) {
-			session.invalidate();
-		}
+		SessionManager.invalidate(request);
 
 		request.getRequestDispatcher("/WEB-INF/views/security/login.jsp").forward(request, response);
 	}

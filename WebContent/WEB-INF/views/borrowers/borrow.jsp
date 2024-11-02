@@ -3,7 +3,7 @@
 
 <div class="container">
     <h1>Reserve a book to borrow</h1>
-    <p>Borrow available: ${user.allowedNumberOfBorrowAvailable()}</p>
+    <p>Borrow available: ${auth.allowedNumberOfBorrowAvailable()}</p>
     <hr>
     <form action="borrows" style="max-width: 400px;" method="post">
         <input type="hidden" name="action" value="return" />

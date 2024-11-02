@@ -8,10 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import entity.User;
 import repository.MembershipRepository;
+import utils.SessionManager;
 
 @WebServlet("/memberships")
 public class MembershipServlet extends HttpServlet {
@@ -61,9 +61,7 @@ public class MembershipServlet extends HttpServlet {
 
 	private void post(HttpServletRequest request, HttpServletResponse response) {
 		UUID type = UUID.fromString(request.getParameter("type"));
-		
-		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
+		User user = SessionManager.getAuth(request);
 
 		MembershipRepository.ask(user, type);
 	}

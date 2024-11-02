@@ -89,7 +89,6 @@ public class UserServlet extends HttpServlet {
 	}
 
 	private void find(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println(request.getParameter("phone"));
 		User user = null;
 
 		try {

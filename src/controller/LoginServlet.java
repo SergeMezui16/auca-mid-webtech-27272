@@ -8,10 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import entity.User;
 import repository.UserRepository;
+import utils.SessionManager;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -39,8 +39,7 @@ public class LoginServlet extends HttpServlet {
 			User user = UserRepository.findById(username);
 
 			if (user != null && UserRepository.checkPassword(password, user.getPassword())) {
-				HttpSession session = request.getSession();
-				session.setAttribute("user", user);
+				SessionManager.setAuth(request, user);
 
 				response.sendRedirect(request.getHeader("Referer") != null ? request.getHeader("Referer") : "/");
 				return;

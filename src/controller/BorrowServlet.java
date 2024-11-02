@@ -9,13 +9,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import entity.Borrower;
 import entity.User;
 import repository.BookRepository;
 import repository.BorrowerRepository;
 import repository.UserRepository;
+import utils.SessionManager;
 
 @WebServlet("/borrows")
 public class BorrowServlet extends HttpServlet {
@@ -35,12 +34,10 @@ public class BorrowServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		HttpSession session = request.getSession();
-		
 		UUID bookId = UUID.fromString(request.getParameter("bookId"));
 		Date dueDate = Date.valueOf(request.getParameter("dueDate"));
 		Date reserveDate = Date.valueOf(request.getParameter("reserveDate"));
-		User user = (User) session.getAttribute("user");
+		User user = SessionManager.getAuth(request);
 		User reader = UserRepository.findById(user.getUsername());
 		
 		if(reader.getMembership() == null) {
@@ -57,10 +54,10 @@ public class BorrowServlet extends HttpServlet {
 			return;
 		}
 		
-		Borrower borrower = BorrowerRepository.reserve(bookId, reserveDate, dueDate, reader);
-		session.invalidate();
+		BorrowerRepository.reserve(bookId, reserveDate, dueDate, reader);
+		SessionManager.invalidate(request);
 		// send a message
 
-		response.sendRedirect(request.getContextPath() + "/home");
+		response.sendRedirect(request.getContextPath() + "/security?action=profile");
 	}
 }

@@ -61,8 +61,8 @@
 			</div>
 			            
             <div class="text-center mt-3">
-				<c:if test="${user != null}">
-				<p>You are already logged as ${user}.<br> Do you want to login as someone else or <a href="${pageContext.request.contextPath}/">go back home</a></p>
+				<c:if test="${auth != null}">
+				<p>You are already logged as ${auth}.<br> Do you want to login as someone else or <a href="${pageContext.request.contextPath}/">go back home</a></p>
 				</c:if>
             </div>
         </form>

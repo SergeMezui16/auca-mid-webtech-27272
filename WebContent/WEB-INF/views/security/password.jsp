@@ -6,7 +6,7 @@
 	<hr>
 	<form action="security" method="post" style="max-width: 400px;">
 			<input type="hidden" name="action" value="password" /> 
-			<input type="hidden" name="id" value="${user.username}" /> 
+			<input type="hidden" name="id" value="${auth.username}" /> 
 		
          <div class="form-group">
              <label for="oldPassword">Current Password:</label>

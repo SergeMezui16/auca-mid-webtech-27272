@@ -2,7 +2,7 @@
 <jsp:include page="../../../partials/header.jsp" />
 
 <div class="container">
-	<h1>Profile ${user.name }</h1>
+	<h1>Profile ${auth.name }</h1>
 	
 	<a class="btn-primary btn" href="${pageContext.request.contextPath}/security?action=password">Change My password</a>	
 	<a class="btn-secondary btn" href="${pageContext.request.contextPath}/security?action=edit">Change My informations</a>
@@ -22,12 +22,12 @@
 	  </thead>
 	  <tbody>
 		<tr>
-			<td>${user.username}</td>
-			<td>${user.role}</td>
-			<td>${user.firstName}</td>
-			<td>${user.lastName}</td>
-			<td>${user.phoneNumber}</td>
-			<td>${user.gender}</td>
+			<td>${auth.username}</td>
+			<td>${auth.role}</td>
+			<td>${auth.firstName}</td>
+			<td>${auth.lastName}</td>
+			<td>${auth.phoneNumber}</td>
+			<td>${auth.gender}</td>
 		</tr>
 	  </tbody>
 	 </table>
@@ -46,21 +46,21 @@
 	  </thead>
 	  <tbody>
 		<tr>
-			<td>${user.name}</td>
-			<td>${user.village.name}</td>
-			<td>${user.village.parent.name}</td>
-			<td>${user.village.parent.parent.name}</td>
-			<td>${user.village.parent.parent.parent.name}</td>
-			<td>${user.village.parent.parent.parent.parent.name}</td>
+			<td>${auth.name}</td>
+			<td>${auth.village.name}</td>
+			<td>${auth.village.parent.name}</td>
+			<td>${auth.village.parent.parent.name}</td>
+			<td>${auth.village.parent.parent.parent.name}</td>
+			<td>${auth.village.parent.parent.parent.parent.name}</td>
 		</tr>
 	  </tbody>
 	 </table>
 	
-	<c:if test="${user.hasMembershipPending() == true }">
+	<c:if test="${auth.hasMembershipPending() == true }">
 	<h3>your memberships is pending...</h3>
 	</c:if>
 
-	<c:if test="${user.hasMembership() == true}">
+	<c:if test="${auth.hasMembership() == true}">
 	<h3>Memberships</h3>
 	
 	<table class="table table-striped mb-5	">
@@ -75,11 +75,11 @@
 	  </thead>
 	  <tbody>
 		<tr>
-			<th>${user.membership.type.name}</th>
-			<th>${user.membership.type.maxBooks}</th>
-			<th>${user.membership.registrationDate}</th>
-			<th>${user.membership.expiringTime}</th>
-			<th>${user.membership.status}</th>
+			<th>${auth.membership.type.name}</th>
+			<th>${auth.membership.type.maxBooks}</th>
+			<th>${auth.membership.registrationDate}</th>
+			<th>${auth.membership.expiringTime}</th>
+			<th>${auth.membership.status}</th>
 		</tr>
 	  </tbody>
 	 </table>

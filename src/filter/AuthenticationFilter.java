@@ -4,7 +4,8 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import utils.SessionManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,8 +32,7 @@ public class AuthenticationFilter implements Filter {
             return;
         }
 
-        HttpSession session = httpRequest.getSession(false);
-        if (session == null || session.getAttribute("user") == null) {
+        if (!SessionManager.isValid(httpRequest)) {
         	System.out.println("No session.");
             httpRequest.getRequestDispatcher("/WEB-INF/views/security/login.jsp").forward(httpRequest, httpResponse);
             return;
