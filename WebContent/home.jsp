@@ -41,12 +41,14 @@
 	
 	
 	<c:if test="${auth.hasMembership() == true}">
+	<c:if test="${auth.mainMembershipIsPending() == false}">
 		<div>
 			<h2>You can borrow a book and see what to do here!</h2>
 			<p>take a look on the available book to be reserve an picked later.</p>
 			
 			<a href="borrows" class="btn btn-primary">Borrow a book</a>
 		</div>
+	</c:if>
 	</c:if>
 
 	<c:if test="${auth.hasMembership() == false}">

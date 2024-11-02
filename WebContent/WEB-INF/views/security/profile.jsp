@@ -5,7 +5,8 @@
 	<h1>Profile ${auth.name }</h1>
 	
 	<a class="btn-primary btn" href="${pageContext.request.contextPath}/security?action=password">Change My password</a>	
-	<a class="btn-secondary btn" href="${pageContext.request.contextPath}/security?action=edit">Change My informations</a>
+	<a class="btn-secondary btn" href="${pageContext.request.contextPath}/security?action=edit">Change My informations</a>	
+	<a class="btn-secondary btn" href="${pageContext.request.contextPath}/security?action=books">My books</a>
 	
 	<hr>
 	<h3>Personal informations</h3>

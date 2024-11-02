@@ -72,6 +72,12 @@ public class User extends Person {
     	return this.memberships.stream().max(Comparator.comparingInt(m -> m.getType().getMaxBooks())).get();
     }
     
+    public boolean mainMembershipIsPending() {
+    	if(!this.hasMembership()) return false;
+    	
+    	return this.getMembership().isPending();
+    }
+    
     public boolean canBorrowBook() {
     	return this.role.equals(Role.TEACHER) || this.role.equals(Role.STUDENT);
     }

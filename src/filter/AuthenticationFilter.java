@@ -5,6 +5,8 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entity.User;
+import repository.UserRepository;
 import utils.SessionManager;
 
 import java.io.IOException;
@@ -30,14 +32,20 @@ public class AuthenticationFilter implements Filter {
         	System.out.println("Authorized path");
             chain.doFilter(request, response);
             return;
-        }
+        }	
 
         if (!SessionManager.isValid(httpRequest)) {
         	System.out.println("No session.");
             httpRequest.getRequestDispatcher("/WEB-INF/views/security/login.jsp").forward(httpRequest, httpResponse);
             return;
         }
-
+        
+        User user = SessionManager.getAuth(httpRequest);
+        
+        if(user != null) {
+            // update session
+            SessionManager.setAuth(httpRequest, UserRepository.findById(user.getUsername()));
+        }
     	System.out.println("Filter passed.");
         chain.doFilter(request, response);
     }

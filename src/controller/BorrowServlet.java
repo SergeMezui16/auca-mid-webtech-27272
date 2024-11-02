@@ -55,8 +55,6 @@ public class BorrowServlet extends HttpServlet {
 		}
 		
 		BorrowerRepository.reserve(bookId, reserveDate, dueDate, reader);
-		SessionManager.invalidate(request);
-		// send a message
 
 		response.sendRedirect(request.getContextPath() + "/security?action=profile");
 	}

@@ -39,6 +39,10 @@ public class SecuritySevlet extends HttpServlet {
 		case "profile":
 			request.getRequestDispatcher("/WEB-INF/views/security/profile.jsp").forward(request, response);
 			break;
+		case "books":
+			request.setAttribute("borrowers", SessionManager.getAuth(request).getBorrowers());
+			request.getRequestDispatcher("/WEB-INF/views/security/books.jsp").forward(request, response);
+			break;
 		default:
 			response.sendRedirect(request.getContextPath() + "/");
 			break;
