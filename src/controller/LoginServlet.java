@@ -40,8 +40,10 @@ public class LoginServlet extends HttpServlet {
 
 			if (user != null && UserRepository.checkPassword(password, user.getPassword())) {
 				SessionManager.setAuth(request, user);
+				
+				System.out.println(request.getHeader("Referer"));
 
-				response.sendRedirect(request.getHeader("Referer") != null ? request.getHeader("Referer") : "/");
+				response.sendRedirect(request.getHeader("Referer").equals("http://localhost:8080/TestServer/login") ? "/" : request.getHeader("Referer"));
 				return;
 			}
 
