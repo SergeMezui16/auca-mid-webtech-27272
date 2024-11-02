@@ -1,0 +1,4 @@
+INSERT INTO `shelf` (`id`, `available_stock`, `book_category`, `borrowed_number`, `initial_stock`, `room_id`) VALUES ('5e2c2833-d084-4391-bb15-360b1b84318d', 4, 'Religion', 3, 3, '3209c48d-5b05-44da-ba02-e39adb3fc3f2');
+INSERT INTO `shelf` (`id`, `available_stock`, `book_category`, `borrowed_number`, `initial_stock`, `room_id`) VALUES ('530a3de9-2bc7-42c2-9655-13bf4ee1a5be', NULL, 'Police', NULL, 3, '300192fc-6644-4ae6-8cde-74e5b5b4acc1');
+INSERT INTO `shelf` (`id`, `available_stock`, `book_category`, `borrowed_number`, `initial_stock`, `room_id`) VALUES ('4b247f55-4594-4a2e-8ccc-3dea93bf6e16', NULL, 'Kid', NULL, 10, 'ef0eda25-3e1a-4d32-9dd5-9a220a22ffb3');
+INSERT INTO `shelf` (`id`, `available_stock`, `book_category`, `borrowed_number`, `initial_stock`, `room_id`) VALUES ('254641d1-5dd4-421c-bd42-60af254262bd', NULL, 'Science', NULL, 3, 'ef0eda25-3e1a-4d32-9dd5-9a220a22ffb3');
